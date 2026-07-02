@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacAngioView — DICOM Cine-Angiogram Viewer for macOS</title>
+<meta name="description" content="MacAngioView is a DICOM cine-angiogram (XA) viewer for macOS. View, play back, and export cardiac catheterization angiography studies.">
+<style>
+  :root{
+    --bg:#0b1220; --panel:#111a2e; --text:#e8edf6; --muted:#9fb0c9;
+    --accent:#3b82f6; --accent-h:#2563eb; --border:#22304d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  header{padding:96px 0 64px;text-align:center;background:radial-gradient(ellipse at top,#16233f 0%,var(--bg) 70%)}
+  h1{font-size:2.8rem;letter-spacing:-.02em}
+  .tagline{font-size:1.25rem;color:var(--muted);margin:16px auto 32px;max-width:600px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:1.1rem;padding:14px 36px;border-radius:10px;transition:background .15s}
+  .btn:hover{background:var(--accent-h)}
+  .sub{color:var(--muted);font-size:.9rem;margin-top:12px}
+  section{padding:56px 0;border-top:1px solid var(--border)}
+  h2{font-size:1.6rem;margin-bottom:24px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px}
+  .card h3{font-size:1.05rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.95rem}
+  ul.req{list-style:none;color:var(--muted)}
+  ul.req li{padding:6px 0;border-bottom:1px solid var(--border)}
+  ul.req li:last-child{border:none}
+  .notice{background:#1a1426;border:1px solid #3a2d55;border-radius:12px;padding:18px 22px;color:var(--muted);font-size:.9rem;margin-top:24px}
+  footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>MacAngioView</h1>
+    <p class="tagline">A DICOM cine-angiogram viewer for macOS. View and play back cardiac catheterization angiography studies from a wide range of cath-lab X-ray systems.</p>
+    <a class="btn" href="https://github.com/wlapointe/macangioview/releases/latest/download/MacAngioView.dmg">Download for Mac</a>
+    <p class="sub">Free download &middot; macOS</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Features</h2>
+    <div class="grid">
+      <div class="card"><h3>DICOM XA playback</h3><p>Open and play multi-frame DICOM XA cine-angiogram runs, including lossless-JPEG compressed studies from cardiac catheter X-ray systems.</p></div>
+      <div class="card"><h3>Broad system compatibility</h3><p>Reads studies exported from many cath-lab digital imaging systems — load a study CD or exported folder and browse the runs.</p></div>
+      <div class="card"><h3>Frame-by-frame review</h3><p>Step through frames, adjust playback speed, and review runs at your own pace.</p></div>
+      <div class="card"><h3>Export</h3><p>Export cine runs to standard movie formats for presentations and teaching files.</p></div>
+    </div>
+    <div class="notice"><strong>Note:</strong> MacAngioView is intended for review and educational use. It is not certified as a medical device and should not be used for primary diagnosis.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Requirements</h2>
+    <ul class="req">
+      <li>macOS (Apple silicon or Intel)</li>
+      <li>DICOM XA studies (cine-angiogram runs) on CD, disk, or folder</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Support</h2>
+    <p style="color:var(--muted)">Questions or feedback? Email <a href="mailto:wil.lapointe@mac.com">wil.lapointe@mac.com</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">&copy; 2026 Wil Lapointe &middot; MacAngioView</div>
+</footer>
+
+</body>
+</html>
