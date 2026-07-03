@@ -3,8 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MacAngioView — DICOM Cine-Angiogram Viewer for macOS</title>
-<meta name="description" content="MacAngioView is a DICOM cine-angiogram (XA) viewer for macOS. View, play back, and export cardiac catheterization angiography studies.">
+<title>MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer for macOS</title>
+<meta name="description" content="MacAngioView is a free DICOM cine viewer for macOS. Play back cardiac catheterization angiography (XA) runs and multiframe ultrasound (US) loops from cath-lab and echo study CDs, and export them to standard movie formats.">
+<link rel="canonical" href="https://macangioview.com/">
+<link rel="icon" type="image/png" href="/icon.png">
+<link rel="apple-touch-icon" href="/icon.png">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MacAngioView">
+<meta property="og:title" content="MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer for macOS">
+<meta property="og:description" content="Free DICOM cine viewer for macOS. Play back cardiac angiography (XA) runs and multiframe ultrasound (US) loops from study CDs, and export to standard movie formats.">
+<meta property="og:url" content="https://macangioview.com/">
+<meta property="og:image" content="https://macangioview.com/screenshot.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer for macOS">
+<meta name="twitter:description" content="Free DICOM cine viewer for macOS. Play back cardiac angiography (XA) runs and multiframe ultrasound (US) loops from study CDs.">
+<meta name="twitter:image" content="https://macangioview.com/screenshot.jpg">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MacAngioView",
+  "operatingSystem": "macOS 12.0 or later",
+  "applicationCategory": "MedicalApplication",
+  "description": "A DICOM cine viewer for macOS that plays back cardiac catheterization angiography (XA) runs and multiframe ultrasound (US) loops, with export to standard movie formats. For review and educational use; not a certified medical device.",
+  "url": "https://macangioview.com/",
+  "image": "https://macangioview.com/icon.png",
+  "screenshot": "https://macangioview.com/screenshot.jpg",
+  "downloadUrl": "https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView.dmg",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Wil Lapointe", "email": "wil.lapointe@mac.com" }
+}
+</script>
+
 <style>
   :root{
     --bg:#0b1220; --panel:#111a2e; --text:#e8edf6; --muted:#9fb0c9;
@@ -15,10 +49,11 @@
   .wrap{max-width:900px;margin:0 auto;padding:0 24px}
   header{padding:96px 0 64px;text-align:center;background:radial-gradient(ellipse at top,#16233f 0%,var(--bg) 70%)}
   h1{font-size:2.8rem;letter-spacing:-.02em}
-  .tagline{font-size:1.25rem;color:var(--muted);margin:16px auto 32px;max-width:600px}
+  .tagline{font-size:1.25rem;color:var(--muted);margin:16px auto 32px;max-width:640px}
   .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:1.1rem;padding:14px 36px;border-radius:10px;transition:background .15s}
   .btn:hover{background:var(--accent-h)}
   .sub{color:var(--muted);font-size:.9rem;margin-top:12px}
+  .shot{display:block;max-width:100%;height:auto;margin:40px auto 0;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
   section{padding:56px 0;border-top:1px solid var(--border)}
   h2{font-size:1.6rem;margin-bottom:24px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
@@ -29,6 +64,8 @@
   ul.req li{padding:6px 0;border-bottom:1px solid var(--border)}
   ul.req li:last-child{border:none}
   .notice{background:#1a1426;border:1px solid #3a2d55;border-radius:12px;padding:18px 22px;color:var(--muted);font-size:.9rem;margin-top:24px}
+  .faq h3{font-size:1.05rem;margin:22px 0 6px}
+  .faq p{color:var(--muted);font-size:.95rem}
   footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
   a{color:var(--accent)}
 </style>
@@ -38,9 +75,11 @@
 <header>
   <div class="wrap">
     <h1>MacAngioView</h1>
-    <p class="tagline">A DICOM cine-angiogram viewer for macOS. View and play back cardiac catheterization angiography studies from a wide range of cath-lab X-ray systems.</p>
+    <p class="tagline">A DICOM cine viewer for macOS. Play back cardiac catheterization angiography (XA) runs and multiframe ultrasound (US) loops from a wide range of cath-lab and echo imaging systems.</p>
     <a class="btn" href="https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView.dmg">Download for Mac</a>
-    <p class="sub">Free download &middot; macOS</p>
+    <p class="sub">Free download &middot; macOS 12 or later &middot; <a href="https://github.com/wlapointe/MacAngioView">Source &amp; releases on GitHub</a></p>
+    <img class="shot" src="/screenshot.jpg" width="1400" height="1040"
+         alt="MacAngioView on macOS playing a coronary cine-angiogram run at 30 fps, with run thumbnails, frame slider, and window-level controls">
   </div>
 </header>
 
@@ -49,9 +88,11 @@
     <h2>Features</h2>
     <div class="grid">
       <div class="card"><h3>DICOM XA playback</h3><p>Open and play multi-frame DICOM XA cine-angiogram runs, including lossless-JPEG compressed studies from cardiac catheter X-ray systems.</p></div>
-      <div class="card"><h3>Broad system compatibility</h3><p>Reads studies exported from many cath-lab digital imaging systems — load a study CD or exported folder and browse the runs.</p></div>
+      <div class="card"><h3>Multiframe ultrasound (US)</h3><p>Play back multiframe DICOM ultrasound cine loops — review echo and vascular ultrasound studies alongside your angiograms.</p></div>
+      <div class="card"><h3>Broad system compatibility</h3><p>Reads studies exported from many cath-lab and ultrasound imaging systems — load a study CD or exported folder and browse the runs.</p></div>
       <div class="card"><h3>Frame-by-frame review</h3><p>Step through frames, adjust playback speed, and review runs at your own pace.</p></div>
       <div class="card"><h3>Export</h3><p>Export cine runs to standard movie formats for presentations and teaching files.</p></div>
+      <div class="card"><h3>Reports</h3><p>View encapsulated PDF reports included in a study, page by page, right next to the imaging.</p></div>
     </div>
     <div class="notice"><strong>Note:</strong> MacAngioView is intended for review and educational use. It is not certified as a medical device and should not be used for primary diagnosis.</div>
   </div>
@@ -61,9 +102,23 @@
   <div class="wrap">
     <h2>Requirements</h2>
     <ul class="req">
-      <li>macOS (Apple silicon or Intel)</li>
-      <li>DICOM XA studies (cine-angiogram runs) on CD, disk, or folder</li>
+      <li>macOS 12 (Monterey) or later — Apple silicon or Intel</li>
+      <li>DICOM XA cine-angiogram runs or multiframe US studies on CD, disk, or folder</li>
     </ul>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <h3>Can I open my angiogram CD on a Mac?</h3>
+    <p>Yes. Insert the CD (or copy its contents to a folder), open MacAngioView, and point it at the disc or folder. It finds the DICOM XA runs automatically — no separate viewer software from the CD is needed.</p>
+    <h3>Does it play ultrasound studies?</h3>
+    <p>Yes. Multiframe DICOM ultrasound (US) cine loops — such as echocardiography and vascular studies — play back the same way as angiography runs.</p>
+    <h3>Is it free?</h3>
+    <p>Yes. MacAngioView is a free download, signed and notarized by Apple, distributed through <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a>.</p>
+    <h3>Can I use it for diagnosis?</h3>
+    <p>No. MacAngioView is for review, education, and personal record-keeping. It is not a certified medical device and must not be used for primary diagnosis or treatment decisions.</p>
   </div>
 </section>
 
