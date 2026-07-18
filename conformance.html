@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DICOM Conformance Statement — MacAngioView</title>
+<meta name="description" content="DICOM Conformance Statement for MacAngioView, the free DICOM angiogram and ultrasound cine viewer for macOS: supported SOP classes, transfer syntaxes, media profiles, and display pipeline.">
+<link rel="canonical" href="https://macangioview.com/conformance.html">
+<link rel="icon" type="image/png" href="/icon.png">
+<style>
+  :root{
+    --bg:#0b1220; --panel:#111a2e; --text:#e8edf6; --muted:#9fb0c9;
+    --accent:#3b82f6; --accent-h:#2563eb; --border:#22304d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
+  .topbar{padding:20px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .topbar a{color:var(--accent);text-decoration:none;font-weight:600}
+  .topbar .pdf{background:var(--accent);color:#fff;padding:8px 18px;border-radius:8px;font-size:.95rem;transition:background .15s}
+  .topbar .pdf:hover{background:var(--accent-h)}
+  article{padding:36px 0 64px}
+  article h1{font-size:2rem;letter-spacing:-.02em;margin-bottom:8px;border-bottom:2px solid var(--border);padding-bottom:10px}
+  article h2{font-size:1.4rem;margin:34px 0 12px;border-bottom:1px solid var(--border);padding-bottom:4px}
+  article h3{font-size:1.1rem;margin:24px 0 8px}
+  article p{margin:10px 0;color:var(--text)}
+  article ul,article ol{margin:10px 0 10px 26px}
+  article li{margin:4px 0}
+  article table{border-collapse:collapse;margin:14px 0;font-size:.92rem;display:block;overflow-x:auto}
+  article th,article td{border:1px solid var(--border);padding:6px 10px;text-align:left;vertical-align:top}
+  article th{background:var(--panel)}
+  article code{font-family:ui-monospace,Menlo,monospace;font-size:.9em;background:var(--panel);padding:1px 5px;border-radius:4px}
+  article blockquote{border-left:4px solid var(--accent);margin:14px 0;padding:6px 16px;background:var(--panel);border-radius:0 8px 8px 0;color:var(--muted)}
+  article hr{border:none;border-top:1px solid var(--border);margin:26px 0}
+  article a{color:var(--accent)}
+  footer{padding:32px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<div class="wrap topbar">
+  <a href="/">&larr; MacAngioView</a>
+  <a class="pdf" href="/DICOM_CONFORMANCE.pdf">Download PDF</a>
+</div>
+
+<article class="wrap">
+<div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p><strong>MacAngioView</strong> — DICOM cine viewer for macOS
+Version 0.3.0b · Document date 2026-07-16 · Document version 1.3 (draft)</p>
+<blockquote>
+<p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
+and educational use only. It is <strong>not a certified medical device</strong> and is
+not intended for primary diagnosis or clinical decision-making. This
+document is structured after DICOM PS3.2 but has not been independently
+audited.</p>
+</blockquote>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">1. Conformance Statement Overview</h2><a id="user-content-1-conformance-statement-overview" class="anchor" aria-label="Permalink: 1. Conformance Statement Overview" href="#1-conformance-statement-overview"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>MacAngioView is a standalone macOS desktop application that reads DICOM
+PS3.10 (Part 10) files and DICOMDIR file-sets from local storage or mounted
+removable media (CD/DVD/USB), and displays X-ray angiographic (XA) cine
+runs, multiframe/single-frame ultrasound (US) images, and the Encapsulated
+PDF and Structured Report (SR) documents contained in a study. It can export loaded runs to QuickTime (.mov)
+movies and copy the displayed frame to the macOS clipboard (both non-DICOM
+outputs).</p>
+<p>MacAngioView implements <strong>Media Interchange services only</strong>, in the
+<strong>File-Set Reader (FSR)</strong> role. It provides <strong>no network services</strong> of any
+kind.</p>
+<div class="markdown-heading"><h3 class="heading-element">Table 1-1. Network Services</h3><a id="user-content-table-1-1-network-services" class="anchor" aria-label="Permalink: Table 1-1. Network Services" href="#table-1-1-network-services"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>User of Service (SCU)</th>
+<th>Provider of Service (SCP)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>All DIMSE services (Verification, Storage, Query/Retrieve, Print, Storage Commitment, Worklist, MPPS)</em></td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td><em>DICOMweb (STOW-RS / QIDO-RS / WADO-RS)</em></td>
+<td>No</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>The application never opens a network association or socket for DICOM
+purposes; it runs fully offline.</p>
+<div class="markdown-heading"><h3 class="heading-element">Table 1-2. Media Services</h3><a id="user-content-table-1-2-media-services" class="anchor" aria-label="Permalink: Table 1-2. Media Services" href="#table-1-2-media-services"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<table>
+<thead>
+<tr>
+<th>Media Storage Application Profile</th>
+<th>Write Files (FSC/FSU)</th>
+<th>Read Files (FSR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General Purpose CD-R / DVD (STD-GEN-CD, STD-GEN-DVD-JPEG)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Basic Cardiac X-Ray Angiographic (STD-XABC-CD)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>1024 X-Ray Angiographic (STD-XA1K-CD, STD-XA1K-DVD)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Ultrasound (STD-US-ID/SC/CC-MF…, CD and DVD media)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>MacAngioView never creates or updates a DICOM file-set and never writes
+DICOM objects.</p>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">2. Introduction</h2><a id="user-content-2-introduction" class="anchor" aria-label="Permalink: 2. Introduction" href="#2-introduction"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h3 class="heading-element">2.1 Revision History</h3><a id="user-content-21-revision-history" class="anchor" aria-label="Permalink: 2.1 Revision History" href="#21-revision-history"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<table>
+<thead>
+<tr>
+<th>Doc version</th>
+<th>Date</th>
+<th>Application version</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0 (draft)</td>
+<td>2026-07-15</td>
+<td>0.2.1b</td>
+<td>Initial statement</td>
+</tr>
+<tr>
+<td>1.1 (draft)</td>
+<td>2026-07-15</td>
+<td>0.2.2b</td>
+<td>Frame VOI LUT functional group, Pixel Aspect Ratio, lossy compression indication</td>
+</tr>
+<tr>
+<td>1.2 (draft)</td>
+<td>2026-07-15</td>
+<td>0.2.2b</td>
+<td>Video transfer syntaxes (MPEG2/H.264/HEVC) decoded via bundled ffmpeg</td>
+</tr>
+<tr>
+<td>1.3 (draft)</td>
+<td>2026-07-16</td>
+<td>0.3.0b</td>
+<td>Structured Report documents rendered as paginated text</td>
+</tr>
+</tbody>
+</table>
+<div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>This document is intended for people integrating or evaluating
+MacAngioView alongside other DICOM applications (modalities, media
+creators, PACS export functions). It assumes familiarity with the DICOM
+standard (PS3.1–PS3.20).</p>
+<p>Conformance to this statement does not guarantee interoperability;
+validation with representative media from the intended source systems is
+recommended.</p>
+<div class="markdown-heading"><h3 class="heading-element">2.3 Definitions and Abbreviations</h3><a id="user-content-23-definitions-and-abbreviations" class="anchor" aria-label="Permalink: 2.3 Definitions and Abbreviations" href="#23-definitions-and-abbreviations"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>FSR — File-Set Reader. TS — Transfer Syntax. SOP — Service-Object Pair.
+VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
+<div class="markdown-heading"><h3 class="heading-element">2.4 Implementation Identification</h3><a id="user-content-24-implementation-identification" class="anchor" aria-label="Permalink: 2.4 Implementation Identification" href="#24-implementation-identification"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application name</td>
+<td>MacAngioView</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>0.3.0b</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>macOS 12+ (Intel and Apple Silicon via Rosetta 2)</td>
+</tr>
+<tr>
+<td>DICOM toolkit</td>
+<td>pydicom 3.0.2 with python-gdcm 3.2.6 and Pillow pixel-data decoders</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">3. Networking</h2><a id="user-content-3-networking" class="anchor" aria-label="Permalink: 3. Networking" href="#3-networking"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Not applicable. MacAngioView implements no DICOM network application
+entities, initiates no associations, and accepts none.</p>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">4. Media Interchange</h2><a id="user-content-4-media-interchange" class="anchor" aria-label="Permalink: 4. Media Interchange" href="#4-media-interchange"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h3 class="heading-element">4.1 Implementation Model</h3><a id="user-content-41-implementation-model" class="anchor" aria-label="Permalink: 4.1 Implementation Model" href="#41-implementation-model"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>One local Application Entity, <strong>MEDIA-FSR</strong>, is activated by the user
+through the GUI (File ▸ Open File…/Open Folder…, or the equivalent
+buttons). It reads a file-set or individual files, builds an index of the
+image and document instances found (metadata only), and then decodes the
+pixel data of a run on demand when the user selects it. Decoded frames are
+held in memory only; nothing is written back to the media, which can be
+ejected from within the application.</p>
+<div class="markdown-heading"><h3 class="heading-element">4.2 Real-World Activities</h3><a id="user-content-42-real-world-activities" class="anchor" aria-label="Permalink: 4.2 Real-World Activities" href="#42-real-world-activities"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<ul>
+<li>
+<strong>RWA 1 — Load a file-set:</strong> the user selects a disc/folder. The
+application locates a <code>DICOMDIR</code> at the selected location or one
+subfolder level below it (case-insensitive name match) and enumerates
+every existing file referenced by Referenced File ID (0004,1500).
+Directory-record hierarchy attributes are not otherwise interpreted.</li>
+<li>
+<strong>RWA 2 — Load individual files:</strong> the user selects a single Part 10
+file, or a folder containing <code>*.dcm</code> files (searched recursively) without
+a DICOMDIR.</li>
+<li>
+<strong>RWA 3 — Review:</strong> indexed instances appear as thumbnails; the selected
+instance is displayed with cine playback, frame stepping, window/level,
+zoom, and edge-enhancement controls. Encapsulated PDF instances are
+rendered as pageable images (or opened in an external PDF viewer), and
+Structured Report instances as pageable text renderings of their
+content tree.</li>
+</ul>
+<div class="markdown-heading"><h3 class="heading-element">4.3 Media Application Profiles — Roles</h3><a id="user-content-43-media-application-profiles--roles" class="anchor" aria-label="Permalink: 4.3 Media Application Profiles — Roles" href="#43-media-application-profiles--roles"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>MacAngioView is a <strong>general-purpose FSR</strong>: it does not verify that a
+file-set declares or conforms to a specific application profile. Any
+file-set whose instances use the SOP classes and transfer syntaxes listed
+below can be read; this covers the STD-GEN, STD-XABC, STD-XA1K, and STD-US
+family profiles listed in Table 1-2.</p>
+<div class="markdown-heading"><h3 class="heading-element">4.4 SOP Classes</h3><a id="user-content-44-sop-classes" class="anchor" aria-label="Permalink: 4.4 SOP Classes" href="#44-sop-classes"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Instance selection is <strong>content-based, not SOP-Class-restricted</strong>: any
+instance whose pixel data can be decoded is displayed. The SOP classes
+below are the design targets and the ones exercised in testing.</p>
+<table>
+<thead>
+<tr>
+<th>SOP Class</th>
+<th>UID</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X-Ray Angiographic Image Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.12.1</td>
+<td>Display, cine</td>
+</tr>
+<tr>
+<td>Enhanced XA Image Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.12.1.1</td>
+<td>Display, cine (frame timing from per-frame Frame Content macros)</td>
+</tr>
+<tr>
+<td>Ultrasound Image Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.6.1</td>
+<td>Display (single frame)</td>
+</tr>
+<tr>
+<td>Ultrasound Multi-frame Image Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.3.1</td>
+<td>Display, cine</td>
+</tr>
+<tr>
+<td>Encapsulated PDF Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.104.1</td>
+<td>Rendered per page (also detected by an <code>application/pdf</code> Encapsulated Document when the SOP Class UID is absent)</td>
+</tr>
+<tr>
+<td>SR Document Storage family (Basic Text, Enhanced, Comprehensive, …)</td>
+<td>1.2.840.10008.5.1.4.1.1.88.*</td>
+<td>Content tree rendered as read-only paginated text (also detected by Modality SR with a Content Sequence when the SOP Class UID is absent). TEXT/CODE/NUM/PNAME/DATE-TIME/UIDREF items shown; IMAGE/COMPOSITE/WAVEFORM references listed by SOP Instance UID, not resolved</td>
+</tr>
+<tr>
+<td>Secondary Capture and other image SOP classes</td>
+<td>various</td>
+<td>Best-effort display when pixel data is decodable</td>
+</tr>
+<tr>
+<td>Media Storage Directory Storage (DICOMDIR)</td>
+<td>1.2.840.10008.1.3.10</td>
+<td>Read (Referenced File ID resolution only)</td>
+</tr>
+</tbody>
+</table>
+<p>Presentation states (GSPS), key object selections, waveforms, and the
+dedicated video SOP classes are <strong>not</strong> interpreted as such — but any
+image instance whose transfer syntax is a video codec (including US
+Multi-frame studies exported as MPEG-4) is decoded and played per 4.5.
+Structured Report documents are rendered as read-only paginated text of
+their content tree; coded entries are shown by their Code Meaning
+(coding scheme designators and values are not displayed), and templates
+are not validated.</p>
+<div class="markdown-heading"><h3 class="heading-element">4.5 Transfer Syntaxes</h3><a id="user-content-45-transfer-syntaxes" class="anchor" aria-label="Permalink: 4.5 Transfer Syntaxes" href="#45-transfer-syntaxes"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Decoding is provided by pydicom with the python-gdcm and Pillow backends;
+the video transfer syntaxes are decoded by the bundled ffmpeg
+(imageio-ffmpeg). All decoders ship in the distributed application.</p>
+<table>
+<thead>
+<tr>
+<th>Transfer Syntax</th>
+<th>UID</th>
+<th>Read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Implicit VR Little Endian</td>
+<td>1.2.840.10008.1.2</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Explicit VR Little Endian</td>
+<td>1.2.840.10008.1.2.1</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Deflated Explicit VR Little Endian</td>
+<td>1.2.840.10008.1.2.1.99</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Explicit VR Big Endian (retired)</td>
+<td>1.2.840.10008.1.2.2</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>RLE Lossless</td>
+<td>1.2.840.10008.1.2.5</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>JPEG Baseline (Process 1)</td>
+<td>1.2.840.10008.1.2.4.50</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>JPEG Extended (Process 2 &amp; 4)</td>
+<td>1.2.840.10008.1.2.4.51</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>JPEG Lossless (Process 14)</td>
+<td>1.2.840.10008.1.2.4.57</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>JPEG Lossless SV1 (Process 14, FOP=1)</td>
+<td>1.2.840.10008.1.2.4.70</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>JPEG-LS Lossless / Near-Lossless</td>
+<td>1.2.840.10008.1.2.4.80 / .81</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>JPEG 2000 Lossless / Lossy</td>
+<td>1.2.840.10008.1.2.4.90 / .91</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>MPEG2, MPEG-4 AVC/H.264 (all profiles)</td>
+<td>1.2.840.10008.1.2.4.100–.106</td>
+<td>Yes — bundled ffmpeg</td>
+</tr>
+<tr>
+<td>HEVC/H.265</td>
+<td>1.2.840.10008.1.2.4.107 / .108</td>
+<td>Yes — bundled ffmpeg</td>
+</tr>
+<tr>
+<td>High-Throughput JPEG 2000 (HTJ2K)</td>
+<td>1.2.840.10008.1.2.4.201–.203</td>
+<td><strong>No</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Video-transfer-syntax runs are decoded whole into memory as RGB frames
+(the encapsulated bitstream is reconstructed across fragments), capped at
+1000 frames per run; window/level does not apply to them. When the data
+set carries no frame-rate attribute, the rate reported by the video stream
+itself is used. An instance in an unsupported transfer syntax is indexed
+but its thumbnail shows <strong>Error</strong> and the failure is logged to the in-app
+Console; it does not block the rest of the study.</p>
+<div class="markdown-heading"><h3 class="heading-element">4.6 Display Pipeline (Attribute Usage)</h3><a id="user-content-46-display-pipeline-attribute-usage" class="anchor" aria-label="Permalink: 4.6 Display Pipeline (Attribute Usage)" href="#46-display-pipeline-attribute-usage"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<ul>
+<li>
+<strong>Photometric Interpretation:</strong> MONOCHROME1 (rendered inverted),
+MONOCHROME2, PALETTE COLOR (color LUT applied), RGB, and the YBR
+variants produced by the JPEG codecs (converted to RGB by the decoder).</li>
+<li>
+<strong>Modality LUT:</strong> linear Rescale Slope (0028,1053) / Intercept
+(0028,1052) are applied to grayscale data. A Modality LUT Sequence is
+<strong>not</strong> applied.</li>
+<li>
+<strong>VOI:</strong> a linear window is applied to grayscale images. The default is
+resolved from, in order: the first value pair of the top-level Window
+Center (0028,1050) / Window Width (0028,1051); the Frame VOI LUT
+functional-group macro (0028,9132) — shared group first, then the first
+per-frame item (per-frame <em>varying</em> windows are not reproduced); the full
+data range. The user can adjust window/level interactively and reset to
+the defaults. VOI LUT Sequence and VOI LUT Function (e.g. SIGMOID) are
+<strong>not</strong> applied.</li>
+<li>
+<strong>Pixel geometry:</strong> non-square pixels are displayed square. The
+vertical:horizontal ratio is taken from Pixel Aspect Ratio (0028,0034),
+or from the row:column ratio of Pixel Spacing (0028,0030) / Imager Pixel
+Spacing (0018,1164) / the Enhanced shared Pixel Measures group; the
+lower-resolution axis is upscaled (never downsampled). Only the ratio is
+used — spacing values are not used for calibrated measurements.</li>
+<li>
+<strong>Lossy compression indication:</strong> the Lossy Image Compression state
+(0028,2110), with method (0028,2114) and ratio (0028,2112) when present,
+is shown in the Patient panel for the selected instance.</li>
+<li>
+<strong>Cine timing:</strong> the playback rate is resolved from, in order:
+XA Acquisition Frame Rate → Cine Rate → Recommended Display Frame Rate →
+Frame Time → mean of Frame Time Vector → Actual Frame Duration → for
+Enhanced multiframe objects, the median inter-frame interval of the
+per-frame Frame Acquisition/Reference DateTime values. Playback is at a
+single uniform rate (user-adjustable); per-frame variable timing is not
+reproduced.</li>
+<li>
+<strong>Not applied / not displayed:</strong> Overlay Planes (60xx), Display Shutter,
+XA Mask/DSA subtraction (Recommended Viewing Mode SUB), calibrated
+measurements (pixel spacing is used for the aspect ratio only),
+Ultrasound Regions, positioner angles, and Grayscale Softcopy
+Presentation States.</li>
+<li>
+<strong>Rendering:</strong> frames are rendered to 8-bit for display, fit to a
+512×512 or 1024×1024 viewport (aspect preserved, never magnified past
+1:1 in 1024 mode). No PS3.14 (GSDF) display calibration is performed.</li>
+</ul>
+<div class="markdown-heading"><h3 class="heading-element">4.7 Extensions Beyond Part 10 Reading</h3><a id="user-content-47-extensions-beyond-part-10-reading" class="anchor" aria-label="Permalink: 4.7 Extensions Beyond Part 10 Reading" href="#47-extensions-beyond-part-10-reading"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<ul>
+<li>Files lacking File Meta Information (raw data sets) are accepted: the
+transfer syntax is inferred from the detected byte order / VR encoding
+and the data set is read best-effort.</li>
+<li>
+<code>DICOMDIR</code> located one directory level below the selected folder is
+accepted (some media place the file-set in a subfolder).</li>
+<li>Encapsulated PDF documents are rendered in-app via PyMuPDF.</li>
+<li>Loaded runs can be exported to QuickTime (.mov, H.264) via the bundled
+ffmpeg; the displayed frame can be copied to the clipboard. These outputs
+are <strong>not</strong> DICOM objects and carry no DICOM header; any burned-in
+identification in the pixel data is preserved as-is.</li>
+</ul>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">5. Support of Character Sets</h2><a id="user-content-5-support-of-character-sets" class="anchor" aria-label="Permalink: 5. Support of Character Sets" href="#5-support-of-character-sets"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Data-set text is decoded by pydicom according to Specific Character Set
+(0008,0005), including ISO-IR 100 (Latin-1) and the other single-byte and
+multi-byte character sets pydicom supports; decoded text is displayed as
+Unicode. Person Name values are displayed with component delimiters (<code>^</code>)
+replaced by spaces; ideographic and phonetic component groups (<code>=</code>
+delimited) are not given special presentation and appear as literal text.</p>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">6. Security</h2><a id="user-content-6-security" class="anchor" aria-label="Permalink: 6. Security" href="#6-security"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<ul>
+<li>The application runs entirely offline; no data leaves the machine except
+by explicit user action (QuickTime export, clipboard copy).</li>
+<li>Media are read-only to the application; Eject unmounts the volume and
+purges all decoded frames and demographics from memory.</li>
+<li>Decoded pixel data is held in memory only; no image cache is written to
+disk. Two transient exceptions: an Encapsulated PDF opened externally is
+written as a temporary PDF file for the system viewer, and a
+video-transfer-syntax bitstream is written to a temporary file for the
+ffmpeg decoder and deleted as soon as decoding ends.</li>
+<li>The application is Developer ID signed and Apple-notarized. The beta
+build stops launching 90 days after first launch.</li>
+<li>No de-identification is performed on export/copy outputs.</li>
+</ul>
+<hr>
+<div class="markdown-heading"><h2 class="heading-element">7. Annexes</h2><a id="user-content-7-annexes" class="anchor" aria-label="Permalink: 7. Annexes" href="#7-annexes"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<div class="markdown-heading"><h3 class="heading-element">7.1 IOD Attribute Usage (informative)</h3><a id="user-content-71-iod-attribute-usage-informative" class="anchor" aria-label="Permalink: 7.1 IOD Attribute Usage (informative)" href="#71-iod-attribute-usage-informative"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Attributes read for indexing and display include: SOP Class UID, Transfer
+Syntax UID, Modality, Number of Frames, Rows/Columns, Bits
+Allocated/Stored, Photometric Interpretation, Pixel Data, the frame-rate
+attributes listed in 4.6, Window Center/Width, the Frame VOI LUT
+functional-group macro, Rescale Slope/Intercept, Pixel Aspect Ratio,
+Pixel Spacing / Imager Pixel Spacing / Pixel Measures (ratio only),
+Lossy Image Compression / Method / Ratio, Palette Color LUT attributes,
+Patient Name, Patient ID, Patient Birth Date, Study Date, Study Time,
+Encapsulated Document, MIME Type of Encapsulated Document, and (DICOMDIR)
+Referenced File ID.</p>
+<div class="markdown-heading"><h3 class="heading-element">7.2 Grayscale Rendering (informative)</h3><a id="user-content-72-grayscale-rendering-informative" class="anchor" aria-label="Permalink: 7.2 Grayscale Rendering (informative)" href="#72-grayscale-rendering-informative"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
+<p>Grayscale frames are mapped with the DICOM linear VOI equation
+(PS3.3 C.11.2.1.2) over the effective window, then quantized to 8 bits;
+MONOCHROME1 output polarity is inverted after windowing.</p>
+
+</article>
+
+<footer>
+  <div class="wrap">&copy; 2026 Wil Lapointe &middot; MacAngioView &middot; <a href="/">macangioview.com</a></div>
+</footer>
+
+</body>
+</html>
