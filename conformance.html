@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TD8P45EQM2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-TD8P45EQM2');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DICOM Conformance Statement — MacAngioView</title>
@@ -55,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer for macOS
-Version 0.4.0b · Document date 2026-07-18 · Document version 2.2 (draft)</p>
+Version 1.0b · Document date 2026-07-19 · Document version 2.3 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -224,6 +215,12 @@ DICOM objects.</p>
 <td>0.4.0b</td>
 <td>Release 0.4.0b — revisions 1.4–2.1 ship in this application version</td>
 </tr>
+<tr>
+<td>2.3 (draft)</td>
+<td>2026-07-19</td>
+<td>1.0b</td>
+<td>US studies displayed at native matrix (rectangular viewport); zoom and thumbnails preserve source aspect; SR zero-valued NUM measurements rendered</td>
+</tr>
 </tbody>
 </table>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -252,7 +249,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td>0.4.0b</td>
+<td>1.0b</td>
 </tr>
 <tr>
 <td>Platform</td>
@@ -548,7 +545,12 @@ Grayscale Softcopy Presentation States.</li>
 <li>
 <strong>Rendering:</strong> frames are rendered to 8-bit for display, fit to a
 512×512 or 1024×1024 viewport (aspect preserved, never magnified past
-1:1 in 1024 mode). No PS3.14 (GSDF) display calibration is performed.</li>
+1:1 in 1024 mode). A study whose image instances are all Ultrasound is
+instead displayed in a viewport matching the study's largest
+pixel-aspect-corrected matrix (height rounded up to a multiple of 4;
+minimum 480×432, maximum 1024 per axis), so US frames render 1:1;
+thumbnails and interactive zoom selections preserve the source aspect
+ratio. No PS3.14 (GSDF) display calibration is performed.</li>
 </ul>
 <div class="markdown-heading"><h3 class="heading-element">4.7 Extensions Beyond Part 10 Reading</h3><a id="user-content-47-extensions-beyond-part-10-reading" class="anchor" aria-label="Permalink: 4.7 Extensions Beyond Part 10 Reading" href="#47-extensions-beyond-part-10-reading"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <ul>
