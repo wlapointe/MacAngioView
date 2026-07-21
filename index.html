@@ -62,7 +62,8 @@
   .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:1.1rem;padding:14px 36px;border-radius:10px;transition:background .15s}
   .btn:hover{background:var(--accent-h)}
   .sub{color:var(--muted);font-size:.9rem;margin-top:12px}
-  .shot{display:block;max-width:100%;height:auto;margin:40px auto 0;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .shot{display:block;max-width:560px;width:100%;height:auto;margin:40px auto 0;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .shot + .shot{margin-top:24px}
   section{padding:56px 0;border-top:1px solid var(--border)}
   h2{font-size:1.6rem;margin-bottom:24px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
@@ -89,6 +90,8 @@
     <p class="sub">Free download &middot; macOS 12 or later &middot; <a href="https://github.com/wlapointe/MacAngioView">Source &amp; releases on GitHub</a></p>
     <img class="shot" src="/screenshot.jpg" width="1400" height="1094"
          alt="MacAngioView on macOS playing a coronary cine-angiogram run at 30 fps, with run thumbnails including a structured report, frame slider, and window-level controls">
+    <img class="shot" src="/Echocardiography-Sample.png" width="1926" height="1532"
+         alt="MacAngioView on macOS playing a color-Doppler echocardiography (ultrasound) loop, with study thumbnails, frame slider, edge-enhance and window-level controls">
   </div>
 </header>
 
