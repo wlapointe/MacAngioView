@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DICOM Conformance Statement — MacAngioView</title>
-<meta name="description" content="DICOM Conformance Statement for MacAngioView, the free DICOM angiogram and ultrasound cine viewer for macOS: supported SOP classes, transfer syntaxes, media profiles, and display pipeline.">
+<meta name="description" content="DICOM Conformance Statement for MacAngioView, the free DICOM angiogram and ultrasound cine viewer: supported SOP classes, transfer syntaxes, media profiles, and display pipeline.">
 <link rel="canonical" href="https://macangioview.com/conformance.html">
 <link rel="icon" type="image/png" href="/icon.png">
 <style>
@@ -45,8 +45,8 @@
 
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
-<p><strong>MacAngioView</strong> — DICOM cine viewer for macOS
-Version 1.0b · Document date 2026-07-19 · Document version 2.3 (draft)</p>
+<p><strong>MacAngioView</strong> — DICOM cine viewer
+Version 1.1b · Document date 2026-07-23 · Document version 2.4 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -56,12 +56,12 @@ audited.</p>
 </blockquote>
 <hr>
 <div class="markdown-heading"><h2 class="heading-element">1. Conformance Statement Overview</h2><a id="user-content-1-conformance-statement-overview" class="anchor" aria-label="Permalink: 1. Conformance Statement Overview" href="#1-conformance-statement-overview"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
-<p>MacAngioView is a standalone macOS desktop application that reads DICOM
+<p>MacAngioView is a standalone desktop application that reads DICOM
 PS3.10 (Part 10) files and DICOMDIR file-sets from local storage or mounted
 removable media (CD/DVD/USB), and displays X-ray angiographic (XA) cine
 runs, multiframe/single-frame ultrasound (US) images, and the Encapsulated
 PDF and Structured Report (SR) documents contained in a study. It can export loaded runs to QuickTime (.mov)
-movies and copy the displayed frame to the macOS clipboard (both non-DICOM
+movies and copy the displayed frame to the system clipboard (both non-DICOM
 outputs).</p>
 <p>MacAngioView implements <strong>Media Interchange services only</strong>, in the
 <strong>File-Set Reader (FSR)</strong> role. It provides <strong>no network services</strong> of any
@@ -220,6 +220,12 @@ DICOM objects.</p>
 <td>2026-07-19</td>
 <td>1.0b</td>
 <td>US studies displayed at native matrix (rectangular viewport); zoom and thumbnails preserve source aspect; SR zero-valued NUM measurements rendered</td>
+</tr>
+<tr>
+<td>2.4 (draft)</td>
+<td>2026-07-23</td>
+<td>1.1b</td>
+<td>Documentation only — product description made platform-neutral ahead of the Windows build; clipboard described as the system clipboard. No change to supported SOP classes, transfer syntaxes, or the display pipeline</td>
 </tr>
 </tbody>
 </table>

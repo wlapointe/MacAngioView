@@ -12,8 +12,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer for macOS</title>
-<meta name="description" content="MacAngioView is a free DICOM cine viewer for macOS. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from cath-lab and echo study CDs, view PDF and Structured Report documents, and export runs to standard movie formats.">
+<title>MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer</title>
+<meta name="description" content="MacAngioView is a free DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from cath-lab and echo study CDs, view PDF and Structured Report documents, and export runs to standard movie formats.">
 <link rel="canonical" href="https://macangioview.com/">
 <link rel="icon" type="image/png" href="/icon.png">
 <link rel="apple-touch-icon" href="/icon.png">
@@ -21,13 +21,13 @@
 <!-- Open Graph / social sharing -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MacAngioView">
-<meta property="og:title" content="MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer for macOS">
-<meta property="og:description" content="Free DICOM cine viewer for macOS. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from study CDs, and export to standard movie formats.">
+<meta property="og:title" content="MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer">
+<meta property="og:description" content="Free DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from study CDs, and export to standard movie formats.">
 <meta property="og:url" content="https://macangioview.com/">
 <meta property="og:image" content="https://macangioview.com/screenshot.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer for macOS">
-<meta name="twitter:description" content="Free DICOM cine viewer for macOS. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from study CDs.">
+<meta name="twitter:title" content="MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer">
+<meta name="twitter:description" content="Free DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from study CDs.">
 <meta name="twitter:image" content="https://macangioview.com/screenshot.jpg">
 
 <!-- Structured data -->
@@ -36,9 +36,9 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "MacAngioView",
-  "operatingSystem": "macOS 12.0 or later",
+  "operatingSystem": "macOS 12.0 or later, Windows 10 or 11 (64-bit)",
   "applicationCategory": "MedicalApplication",
-  "description": "A DICOM cine viewer for macOS that plays back x-ray angiography (XA) and multiframe ultrasound (US) loops, with export to standard movie formats. For review and educational use; not a certified medical device.",
+  "description": "A DICOM cine viewer that plays back x-ray angiography (XA) and multiframe ultrasound (US) loops, with export to standard movie formats. For review and educational use; not a certified medical device.",
   "url": "https://macangioview.com/",
   "image": "https://macangioview.com/icon.png",
   "screenshot": "https://macangioview.com/screenshot.jpg",
@@ -61,6 +61,10 @@
   .tagline{font-size:1.25rem;color:var(--muted);margin:16px auto 32px;max-width:640px}
   .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:1.1rem;padding:14px 36px;border-radius:10px;transition:background .15s}
   .btn:hover{background:var(--accent-h)}
+  /* Stacked download buttons: one column sized to the widest label, centred,
+     so both buttons share a width regardless of their text. */
+  .dl{display:grid;grid-auto-rows:auto;justify-content:center;gap:12px}
+  .dl .btn{width:100%;text-align:center}
   .sub{color:var(--muted);font-size:.9rem;margin-top:12px}
   .shot{display:block;max-width:560px;width:100%;height:auto;margin:40px auto 0;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
   .shot + .shot{margin-top:24px}
@@ -77,6 +81,9 @@
   .faq h3{font-size:1.05rem;margin:22px 0 6px}
   .faq p{color:var(--muted);font-size:.95rem}
   footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+  /* Download tally: deliberately understated, bottom-right. Stays empty (and
+     so invisible) if the GitHub API call fails or is rate-limited. */
+  .dlcount{text-align:right;font-size:.7rem;color:var(--muted);opacity:.5;margin-top:10px;font-variant-numeric:tabular-nums}
   a{color:var(--accent)}
 </style>
 </head>
@@ -85,13 +92,16 @@
 <header>
   <div class="wrap">
     <h1>MacAngioView</h1>
-    <p class="tagline">A DICOM cine viewer for macOS. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from a wide range of cath-lab and echo imaging systems — and read the study's PDF and Structured Report documents alongside.</p>
-    <a class="btn" href="https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView.dmg">Download for Mac</a>
-    <p class="sub">Free download &middot; macOS 12 or later &middot; <a href="https://github.com/wlapointe/MacAngioView">Source &amp; releases on GitHub</a></p>
-    <img class="shot" src="/screenshot.jpg" width="1400" height="1094"
-         alt="MacAngioView on macOS playing a coronary cine-angiogram run at 30 fps, with run thumbnails including a structured report, frame slider, and window-level controls">
-    <img class="shot" src="/Echocardiography-Sample.png" width="1926" height="1532"
-         alt="MacAngioView on macOS playing a color-Doppler echocardiography (ultrasound) loop, with study thumbnails, frame slider, edge-enhance and window-level controls">
+    <p class="tagline">A DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from a wide range of cath-lab and echo imaging systems — and read the study's PDF and Structured Report documents alongside.</p>
+    <div class="dl">
+      <a class="btn" href="https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView.dmg">Download for Mac</a>
+      <a class="btn" href="https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView-Windows.zip">Download for Windows 10/11</a>
+    </div>
+    <p class="sub">Free download &middot; macOS 12 or later &middot; Windows 10/11 (64-bit) &middot; <a href="https://github.com/wlapointe/MacAngioView">Source &amp; releases on GitHub</a></p>
+    <img class="shot" src="/screenshot.jpg" width="1750" height="1550"
+         alt="MacAngioView playing a coronary cine-angiogram run at 30 fps, with run thumbnails including a structured report, frame slider, and window-level controls">
+    <img class="shot" src="/Echocardiography-Sample.png" width="1910" height="1550"
+         alt="MacAngioView playing a color-Doppler echocardiography (ultrasound) loop, with study thumbnails, frame slider, edge-enhance and window-level controls">
   </div>
 </header>
 
@@ -115,7 +125,8 @@
   <div class="wrap">
     <h2>Requirements</h2>
     <ul class="req">
-      <li>macOS 12 (Monterey) or later — Apple silicon or Intel</li>
+      <li>Mac — macOS 12 (Monterey) or later, Apple silicon or Intel</li>
+      <li>Windows — Windows 10 or 11, 64-bit</li>
       <li>DICOM XA cine-angiogram runs or multiframe US studies on CD, disk, or folder</li>
     </ul>
   </div>
@@ -124,12 +135,14 @@
 <section class="faq">
   <div class="wrap">
     <h2>FAQ</h2>
-    <h3>Can I open my angiogram CD on a Mac?</h3>
+    <h3>Can I open my angiogram CD myself?</h3>
     <p>Yes. Insert the CD (or copy its contents to a folder), open MacAngioView, and point it at the disc or folder. It finds the DICOM XA runs automatically — no separate viewer software from the CD is needed.</p>
     <h3>Does it play ultrasound studies?</h3>
     <p>Yes. Multiframe DICOM ultrasound (US) cine loops — such as echocardiography and vascular studies — play back the same way as angiography runs.</p>
     <h3>Is it free?</h3>
-    <p>Yes. MacAngioView is a free download, signed and notarized by Apple, distributed through <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a>.</p>
+    <p>Yes. MacAngioView is a free download, distributed through <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a>. The Mac build is signed and notarized by Apple, so it opens with no security warnings.</p>
+    <h3>Windows says "Windows protected your PC" — is that a problem?</h3>
+    <p>No. The Windows beta isn't code-signed yet, so SmartScreen warns on first launch. Click <strong>More info</strong>, then <strong>Run anyway</strong>. Extract the zip first and run <code>MacAngioView.exe</code> from the extracted folder.</p>
     <h3>Can I use it for diagnosis?</h3>
     <p>No. MacAngioView is for review, education, and personal record-keeping. It is not a certified medical device and must not be used for primary diagnosis or treatment decisions.</p>
     <h3>Is there a DICOM Conformance Statement?</h3>
@@ -145,8 +158,38 @@
 </section>
 
 <footer>
-  <div class="wrap">&copy; 2026 Wil Lapointe &middot; MacAngioView &middot; <a href="/conformance.html">DICOM Conformance Statement</a></div>
+  <div class="wrap">&copy; 2026 Wil Lapointe &middot; MacAngioView &middot; <a href="/conformance.html">DICOM Conformance Statement</a>
+    <div class="dlcount" id="dlcount"></div>
+  </div>
 </footer>
+
+<script>
+// Release-asset download tallies, straight from the public GitHub API
+// (CORS-enabled, 60 req/hr per visitor IP, 60s cache). Rendered as
+// <mac>-<windows>. Any failure leaves the element empty rather than
+// showing a broken placeholder.
+(function () {
+  var el = document.getElementById('dlcount');
+  if (!el) return;
+  fetch('https://api.github.com/repos/wlapointe/MacAngioView/releases')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (releases) {
+      if (!Array.isArray(releases)) return;
+      var mac = 0, win = 0;
+      releases.forEach(function (rel) {
+        (rel.assets || []).forEach(function (a) {
+          var n = (a.name || '').toLowerCase();
+          var c = a.download_count || 0;
+          if (n.endsWith('.dmg')) mac += c;
+          else if (n.endsWith('.exe') || n.endsWith('.msi') ||
+                   n.indexOf('windows') !== -1) win += c;
+        });
+      });
+      el.textContent = mac + '-' + win;
+    })
+    .catch(function () { /* leave the tally out entirely */ });
+})();
+</script>
 
 </body>
 </html>
