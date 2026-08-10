@@ -46,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer
-Version 1.2b · Document date 2026-07-29 · Document version 2.5 (draft)</p>
+Version 1.3b · Document date 2026-08-07 · Document version 2.7 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -233,6 +233,18 @@ DICOM objects.</p>
 <td>1.2b</td>
 <td>Documentation only — Windows export folder pickers fixed and batch export now isolates per-run failures. No change to supported SOP classes, transfer syntaxes, or the display pipeline</td>
 </tr>
+<tr>
+<td>2.6 (draft)</td>
+<td>2026-08-04</td>
+<td>1.2b</td>
+<td>Documentation only — corrected the JPEG Extended (Process 2 &amp; 4) transfer syntax claim: 12-bit samples are not currently decodable by either bundled decoder (python-gdcm, Pillow), verified against a real 12-bit XA sample. No change to the application itself</td>
+</tr>
+<tr>
+<td>2.7 (draft)</td>
+<td>2026-08-07</td>
+<td>1.3b</td>
+<td>Caliper Tool: application-computed distance measurements from Ultrasound Region / Pixel Spacing / Imager Pixel Spacing attributes, or a manual catheter calibration (§4.6, §7.1) — supersedes the 2.2–2.6 "calibrated measurements: not applied" note. Quiz Mode (§4.7): a non-DICOM self-study workflow, no change to the data read or displayed</td>
+</tr>
 </tbody>
 </table>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -261,7 +273,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td>1.2b</td>
+<td>1.3b</td>
 </tr>
 <tr>
 <td>Platform</td>
@@ -422,7 +434,7 @@ the video transfer syntaxes are decoded by the bundled ffmpeg
 <tr>
 <td>JPEG Extended (Process 2 &amp; 4)</td>
 <td>1.2.840.10008.1.2.4.51</td>
-<td>Yes</td>
+<td>8-bit only — both bundled decoders (python-gdcm, Pillow) refuse 12-bit samples; a 12-bit XA sample also failed against the (unbundled) pylibjpeg-libjpeg plugin</td>
 </tr>
 <tr>
 <td>JPEG Lossless (Process 14)</td>
@@ -497,7 +509,8 @@ vertical:horizontal ratio is taken from Pixel Aspect Ratio (0028,0034),
 or from the row:column ratio of Pixel Spacing (0028,0030) / Imager Pixel
 Spacing (0018,1164) / the Enhanced shared Pixel Measures group; the
 lower-resolution axis is upscaled (never downsampled). Only the ratio is
-used — spacing values are not used for calibrated measurements.</li>
+used here — see Calibrated distance measurement below for the one place
+an absolute spacing value is used.</li>
 <li>
 <strong>Lossy compression indication:</strong> the Lossy Image Compression state
 (0028,2110), with method (0028,2114) and ratio (0028,2112) when present,
@@ -551,9 +564,32 @@ the currently displayed frame as the mask (View menu), which enables
 subtraction for multi-frame grayscale cines carrying no Mask
 Subtraction Sequence and supersedes a file-provided spec until removed.</li>
 <li>
-<strong>Not applied / not displayed:</strong> calibrated measurements (pixel
-spacing is used for the aspect ratio only), Ultrasound Regions, and
-Grayscale Softcopy Presentation States.</li>
+<strong>Calibrated distance measurement (Caliper Tool):</strong> an application
+feature (View ▸ Caliper Tool) that reports a user-drawn two-point
+distance in millimeters, resolved per run at index time in priority
+order: (1) the first item of the Sequence of Ultrasound Regions
+(0018,6011)'s Physical Delta X (0018,602C) when its Physical Units X
+Direction (0018,6024) is cm; (2) Pixel Spacing (0028,0030)'s column
+value; (3) for XA/RF only, Imager Pixel Spacing (0018,1164) divided by
+the geometric magnification — Estimated Radiographic Magnification
+Factor (0018,1114), else Distance Source to Detector (0018,1110) ÷
+Distance Source to Patient (0018,1111) — an isocenter-plane
+approximation shown as an <strong>approximate</strong> reading ("~N mm") until the
+user calibrates on a visible reference (below). No calibration is
+written back to the data set, and no DICOM measurement/annotation
+object (e.g. an SR or GSPS) is created — the result is display-only,
+shown as an on-screen overlay and optionally recorded in a Quiz Mode
+finding (§4.7).
+As an application feature beyond the data set, View ▸ Calibrate
+Caliper… lets the user re-derive the scale by measuring across a
+reference of known size (a catheter shaft, by French size, or a
+custom length) — this manual calibration always takes priority over
+the automatic scale above, persists per run for the session, and is
+the only path to a scale for a run whose data set has none of the
+attributes listed above.</li>
+<li>
+<strong>Not applied / not displayed:</strong> Grayscale Softcopy Presentation
+States.</li>
 <li>
 <strong>Rendering:</strong> frames are rendered to 8-bit for display, fit to a
 512×512 or 1024×1024 viewport (aspect preserved, never magnified past
@@ -577,6 +613,17 @@ accepted (some media place the file-set in a subfolder).</li>
 ffmpeg; the displayed frame can be copied to the clipboard. These outputs
 are <strong>not</strong> DICOM objects and carry no DICOM header; any burned-in
 identification in the pixel data is preserved as-is.</li>
+<li>
+<strong>Quiz Mode</strong> (View ▸ Quiz Mode) is a non-DICOM, application-only
+self-study feature: it withholds the display of a study's own
+SR/Encapsulated PDF instances from the Select strip until the user
+reveals them, and lets the user record structured findings (Cath/Echo/
+Vascular templates) referencing the Caliper Tool's measurements. Neither
+toggling it nor recording findings reads any additional DICOM attribute
+or alters the source data set; the saved findings are written as a
+plain JSON file (not a DICOM SR or other DICOM object) alongside a
+de-identified run label and the application version, at a location the
+user chooses.</li>
 </ul>
 <hr>
 <div class="markdown-heading"><h2 class="heading-element">5. Support of Character Sets</h2><a id="user-content-5-support-of-character-sets" class="anchor" aria-label="Permalink: 5. Support of Character Sets" href="#5-support-of-character-sets"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -612,14 +659,19 @@ Allocated/Stored, Photometric Interpretation, Pixel Data, the frame-rate
 attributes listed in 4.6, Window Center/Width, the Frame VOI LUT
 functional-group macro, Modality LUT Sequence, Rescale Slope/Intercept,
 VOI LUT Sequence, VOI LUT Function, Pixel Aspect Ratio,
-Pixel Spacing / Imager Pixel Spacing / Pixel Measures (ratio only),
-Lossy Image Compression / Method / Ratio, Palette Color LUT attributes,
-Positioner Primary/Secondary Angle (and the Positioner Position macro),
-the 60xx Overlay Plane attributes, the Display Shutter attributes,
-the Mask Subtraction Sequence and Recommended Viewing Mode,
-Patient Name, Patient ID, Patient Birth Date, Study Date, Study Time,
-Encapsulated Document, MIME Type of Encapsulated Document, and (DICOMDIR)
-Referenced File ID.</p>
+Pixel Spacing / Imager Pixel Spacing / Pixel Measures (ratio only, except
+where noted below), Lossy Image Compression / Method / Ratio, Palette
+Color LUT attributes, Positioner Primary/Secondary Angle (and the
+Positioner Position macro), the 60xx Overlay Plane attributes, the
+Display Shutter attributes, the Mask Subtraction Sequence and
+Recommended Viewing Mode, Patient Name, Patient ID, Patient Birth Date,
+Study Date, Study Time, Encapsulated Document, MIME Type of Encapsulated
+Document, and (DICOMDIR) Referenced File ID.</p>
+<p>For the Caliper Tool's calibrated distance measurement (§4.6), Pixel
+Spacing and Imager Pixel Spacing are additionally read for their absolute
+value (not just the ratio), together with Sequence of Ultrasound Regions
+/ Physical Delta X / Physical Units X Direction, Estimated Radiographic
+Magnification Factor, and Distance Source to Detector / Patient.</p>
 <div class="markdown-heading"><h3 class="heading-element">7.2 Grayscale Rendering (informative)</h3><a id="user-content-72-grayscale-rendering-informative" class="anchor" aria-label="Permalink: 7.2 Grayscale Rendering (informative)" href="#72-grayscale-rendering-informative"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>Grayscale frames are mapped with the DICOM VOI equations (PS3.3
 C.11.2.1.2 LINEAR; C.11.2.1.3 LINEAR_EXACT and SIGMOID) over the effective
