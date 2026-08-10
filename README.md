@@ -18,9 +18,18 @@ disks, or exported folders.
 - **Broad compatibility** — reads studies exported from many cath-lab and
   ultrasound imaging systems; just open a study CD or folder
 - **Frame-by-frame review** — step through frames and adjust playback speed
+- **DSA subtraction** — view angiograms with the standing anatomy subtracted
+  away, automatically or from a manually picked mask frame
 - **Export** — save cine runs as standard movie files for presentations and
   teaching
-- **Reports** — view encapsulated PDF reports included in a study
+- **Reports** — view a study's encapsulated PDF reports and DICOM Structured
+  Reports (cath, QCA, hemodynamics, ECG summaries) alongside the imaging
+- **Quiz Mode** — a self-study workflow that hides a study's own report until
+  you're ready, then lets you record your own findings and check them
+  against it
+- **Caliper Tool** — two-click mm distance measurement, calibrated
+  automatically from ultrasound region or XA beam geometry, or manually from
+  a catheter shaft
 
 ## Requirements
 
