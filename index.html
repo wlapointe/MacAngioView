@@ -66,6 +66,7 @@
   .dl{display:grid;grid-auto-rows:auto;justify-content:center;gap:12px}
   .dl .btn{width:100%;text-align:center}
   .sub{color:var(--muted);font-size:.9rem;margin-top:12px}
+  .version{color:var(--muted);font-size:.8rem;opacity:.7;margin-top:6px}
   .shot{display:block;max-width:560px;width:100%;height:auto;margin:40px auto 0;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
   .shot + .shot{margin-top:24px}
   section{padding:56px 0;border-top:1px solid var(--border)}
@@ -92,6 +93,7 @@
 <header>
   <div class="wrap">
     <h1>MacAngioView</h1>
+    <p class="version" id="version"></p>
     <p class="tagline">A DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from a wide range of cath-lab and echo imaging systems — and read the study's PDF and Structured Report documents alongside.</p>
     <div class="dl">
       <a class="btn" href="https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView.dmg">Download for Mac</a>
@@ -166,6 +168,19 @@
 </footer>
 
 <script>
+// Latest release version, straight from the public GitHub API. Leaves the
+// element empty rather than showing a stale or broken placeholder on failure.
+(function () {
+  var el = document.getElementById('version');
+  if (!el) return;
+  fetch('https://api.github.com/repos/wlapointe/MacAngioView/releases/latest')
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (rel) {
+      if (rel && rel.tag_name) el.textContent = 'Latest version: ' + rel.tag_name;
+    })
+    .catch(function () { /* leave it out entirely */ });
+})();
+
 // Release-asset download tallies, straight from the public GitHub API
 // (CORS-enabled, 60 req/hr per visitor IP, 60s cache). Rendered as
 // <mac>-<windows>. Any failure leaves the element empty rather than
