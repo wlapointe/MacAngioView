@@ -11,19 +11,25 @@ disks, or exported folders.
 
 ## Features
 
-- **DICOM XA playback** — multi-frame cine-angiogram runs, including
-  lossless-JPEG compressed studies from cardiac catheter X-ray systems
+- **DICOM XA / RF playback** — multi-frame cine-angiogram and
+  radiofluoroscopic runs, including lossless-JPEG compressed studies from
+  cardiac catheter X-ray systems
 - **Multiframe ultrasound (US)** — echo and vascular ultrasound cine loops
   play back the same way as angiography runs
-- **Broad compatibility** — reads studies exported from many cath-lab and
-  ultrasound imaging systems; just open a study CD or folder
+- **CT/CTA series** — a study's CT slices are grouped into one browsable
+  stack and stepped frame by frame, with a Preset picker for multi-valued
+  window/level (soft tissue, bone, lung)
+- **Broad compatibility** — reads studies exported from many cath-lab,
+  ultrasound, and CT imaging systems; just open a study CD or folder
 - **Frame-by-frame review** — step through frames and adjust playback speed
 - **DSA subtraction** — view angiograms with the standing anatomy subtracted
   away, automatically or from a manually picked mask frame
 - **Export** — save cine runs as standard movie files for presentations and
   teaching
-- **Reports** — view a study's encapsulated PDF reports and DICOM Structured
-  Reports (cath, QCA, hemodynamics, ECG summaries) alongside the imaging
+- **Reports & waveforms** — view a study's encapsulated PDF reports, DICOM
+  Structured Reports (cath, QCA, hemodynamics, ECG summaries), and Waveform
+  Storage instances (12-lead ECG, hemodynamic, cardiac EP) rendered as
+  calibrated lead-strip pages, alongside the imaging
 - **Quiz Mode** — a self-study workflow that hides a study's own report until
   you're ready, then lets you record your own findings and check them
   against it
