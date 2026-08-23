@@ -245,6 +245,24 @@ DICOM objects.</p>
 <td>1.3b</td>
 <td>Caliper Tool: application-computed distance measurements from Ultrasound Region / Pixel Spacing / Imager Pixel Spacing attributes, or a manual catheter calibration (§4.6, §7.1) — supersedes the 2.2–2.6 "calibrated measurements: not applied" note. Quiz Mode (§4.7): a non-DICOM self-study workflow, no change to the data read or displayed</td>
 </tr>
+<tr>
+<td>2.8 (draft)</td>
+<td>2026-08-10</td>
+<td>1.4b</td>
+<td>X-Ray Radiofluoroscopic Image Storage (RF) named explicitly as a supported SOP Class — decodes and displays through the same pipeline as XA; no application change was required (§4.4)</td>
+</tr>
+<tr>
+<td>2.9 (draft)</td>
+<td>2026-08-10</td>
+<td>1.4b</td>
+<td>Waveform Storage instances (12-lead/general/ambulatory ECG, hemodynamic, cardiac EP, ...) now rendered as paginated, calibrated lead-strip images (waveform_render) instead of only being listed by SOP Instance UID — supersedes the 2.2–2.8 "waveforms: not interpreted as such" note (§4.4)</td>
+</tr>
+<tr>
+<td>2.10 (draft)</td>
+<td>2026-08-23</td>
+<td>1.4b</td>
+<td>CT Image Storage (CT/CTA) named explicitly as a supported SOP Class: a study's single-frame CT slices sharing one Series Instance UID are grouped into one browsable multi-slice run (stepped, not cine-played) instead of arriving as N separate unplayable single-frame runs; multi-valued Window Center/Width (e.g. SOFT TISSUE/BONE/LUNG) is now offered as a selectable preset for any grayscale run that carries more than one W/L pair, not just CT (§4.4, §4.6, §7.1)</td>
+</tr>
 </tbody>
 </table>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -349,6 +367,16 @@ below are the design targets and the ones exercised in testing.</p>
 <td>Display, cine (frame timing from per-frame Frame Content macros)</td>
 </tr>
 <tr>
+<td>X-Ray Radiofluoroscopic Image Storage (RF)</td>
+<td>1.2.840.10008.5.1.4.1.1.12.2</td>
+<td>Display, cine — same pipeline as XA (content-based selection; not a distinct code path)</td>
+</tr>
+<tr>
+<td>CT Image Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.2</td>
+<td>Single-frame slices sharing a Series Instance UID are grouped into one browsable multi-slice run, ordered by Instance Number, and stepped (Left/Right or the frame slider) — not cine-played, since the "frames" are separate files with no playback timing of their own (§4.6)</td>
+</tr>
+<tr>
 <td>Ultrasound Image Storage</td>
 <td>1.2.840.10008.5.1.4.1.1.6.1</td>
 <td>Display (single frame)</td>
@@ -369,6 +397,11 @@ below are the design targets and the ones exercised in testing.</p>
 <td>Content tree rendered as read-only paginated text (also detected by Modality SR with a Content Sequence when the SOP Class UID is absent). TEXT/CODE/NUM/PNAME/DATE-TIME/UIDREF items shown; IMAGE/COMPOSITE/WAVEFORM references listed by SOP Instance UID, not resolved</td>
 </tr>
 <tr>
+<td>Waveform Storage family (12-lead/General/Ambulatory ECG, Hemodynamic, Cardiac Electrophysiology, …)</td>
+<td>1.2.840.10008.5.1.4.1.1.9.*</td>
+<td>Each multiplex group's channels rendered as paginated, calibrated lead-strip images (waveform_render) — a channel's trace is in physical units (e.g. µV) when Channel Sensitivity is present, else raw digital values; also detected by the presence of a Waveform Sequence when the SOP Class UID is absent</td>
+</tr>
+<tr>
 <td>Secondary Capture and other image SOP classes</td>
 <td>various</td>
 <td>Best-effort display when pixel data is decodable</td>
@@ -380,14 +413,16 @@ below are the design targets and the ones exercised in testing.</p>
 </tr>
 </tbody>
 </table>
-<p>Presentation states (GSPS), key object selections, waveforms, and the
-dedicated video SOP classes are <strong>not</strong> interpreted as such — but any
-image instance whose transfer syntax is a video codec (including US
-Multi-frame studies exported as MPEG-4) is decoded and played per 4.5.
-Structured Report documents are rendered as read-only paginated text of
-their content tree; coded entries are shown by their Code Meaning
-(coding scheme designators and values are not displayed), and templates
-are not validated.</p>
+<p>Presentation states (GSPS) and key object selections are <strong>not</strong>
+interpreted as such — but any image instance whose transfer syntax is a
+video codec (including US Multi-frame studies exported as MPEG-4) is
+decoded and played per 4.5. Structured Report documents are rendered as
+read-only paginated text of their content tree; coded entries are shown
+by their Code Meaning (coding scheme designators and values are not
+displayed), and templates are not validated. IMAGE/COMPOSITE references
+inside an SR content tree are listed by SOP Instance UID rather than
+resolved to the referenced instance, even when that instance is a
+Waveform run present elsewhere in the same study.</p>
 <div class="markdown-heading"><h3 class="heading-element">4.5 Transfer Syntaxes</h3><a id="user-content-45-transfer-syntaxes" class="anchor" aria-label="Permalink: 4.5 Transfer Syntaxes" href="#45-transfer-syntaxes"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>Decoding is provided by pydicom with the python-gdcm and Pillow backends;
 the video transfer syntaxes are decoded by the bundled ffmpeg
@@ -564,6 +599,33 @@ the currently displayed frame as the mask (View menu), which enables
 subtraction for multi-frame grayscale cines carrying no Mask
 Subtraction Sequence and supersedes a file-provided spec until removed.</li>
 <li>
+<strong>Multi-slice series grouping (CT/CTA):</strong> single-frame image instances
+that share a Series Instance UID (0020,000E) — a CT/CTA axial series,
+which arrives as one file per slice with no cine mechanism of its own —
+are collapsed at index time into one browsable multi-slice run, ordered
+by Instance Number (0020,0013), falling back to SOP Instance UID then
+the source path on ties or when it is absent. Each slice is decoded from
+its own file on selection (no combined in-memory volume, no
+interpolation between slices — the same "decode on demand" pattern used
+for cine frames). The run steps (Left/Right, the frame slider) but does
+not cine-play, since there is no real inter-slice playback timing; it
+keeps window leveling and behaves like a normal image run for Quiz Mode,
+export, and the Caliper Tool — a true multi-frame cine (Number of
+Frames &gt; 1) is never grouped this way, even when it shares a Series
+Instance UID with other runs.</li>
+<li>
+<strong>Selectable Window Center/Width presets:</strong> any grayscale run whose
+Window Center (0028,1050) / Window Width (0028,1051) carry more than one
+value pair — e.g. CT's SOFT TISSUE/BONE/LUNG presets — offers a Preset
+picker (info column) that applies a chosen pair as the active window;
+labels come positionally from Window Center &amp; Width Explanation
+(0028,1055) when present, else "Preset N". The default window shown on
+first display is still the first pair, per the VOI resolution order
+above; selecting a preset does not persist across slices of a grouped
+series run (§ above) — stepping to another slice keeps the last
+window/level the user set, matching how a real DICOM viewer's W/L
+control behaves when paging a stack.</li>
+<li>
 <strong>Calibrated distance measurement (Caliper Tool):</strong> an application
 feature (View ▸ Caliper Tool) that reports a user-drawn two-point
 distance in millimeters, resolved per run at index time in priority
@@ -666,7 +728,15 @@ Positioner Position macro), the 60xx Overlay Plane attributes, the
 Display Shutter attributes, the Mask Subtraction Sequence and
 Recommended Viewing Mode, Patient Name, Patient ID, Patient Birth Date,
 Study Date, Study Time, Encapsulated Document, MIME Type of Encapsulated
-Document, and (DICOMDIR) Referenced File ID.</p>
+Document, Waveform Sequence and its Number of Waveform
+Channels/Samples, Sampling Frequency, Waveform Bits Allocated, Waveform
+Sample Interpretation, Waveform Data, Multiplex Group Label, and the
+per-channel Channel Definition Sequence (Channel Source Sequence,
+Channel Sensitivity, Channel Sensitivity Correction Factor, Channel
+Baseline, Channel Sensitivity Units Sequence, Channel Label), Series
+Instance UID, Instance Number and Window Center &amp; Width Explanation (for
+multi-slice series grouping and W/L presets — see §4.6), and (DICOMDIR)
+Referenced File ID.</p>
 <p>For the Caliper Tool's calibrated distance measurement (§4.6), Pixel
 Spacing and Imager Pixel Spacing are additionally read for their absolute
 value (not just the ratio), together with Sequence of Ultrasound Regions
