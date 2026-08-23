@@ -79,6 +79,12 @@
   ul.req li{padding:6px 0;border-bottom:1px solid var(--border)}
   ul.req li:last-child{border:none}
   .notice{background:#1a1426;border:1px solid #3a2d55;border-radius:12px;padding:18px 22px;color:var(--muted);font-size:.9rem;margin-top:24px}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+  .tab{background:var(--panel);border:1px solid var(--border);color:var(--muted);font:inherit;font-weight:600;font-size:.95rem;padding:10px 20px;border-radius:8px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+  .tab:hover{color:var(--text)}
+  .tab[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .tabpanel .shot{margin-top:0}
+  .tabcaption{color:var(--muted);font-size:.95rem;margin-top:16px;max-width:640px}
   .faq h3{font-size:1.05rem;margin:22px 0 6px}
   .faq p{color:var(--muted);font-size:.95rem}
   footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
@@ -128,6 +134,29 @@
 
 <section>
   <div class="wrap">
+    <h2>New in 1.4b</h2>
+    <div class="tabs" role="tablist" aria-label="New modality screenshots">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="tab-cta" id="tabbtn-cta">CT/CTA</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="tab-rf" id="tabbtn-rf">RF Fluoroscopy</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="tab-wave" id="tabbtn-wave">ECG Waveform</button>
+    </div>
+    <div class="tabpanel" id="tab-cta" role="tabpanel" aria-labelledby="tabbtn-cta">
+      <img class="shot" src="/CTA-Sample.png" width="1750" height="1466" alt="MacAngioView stepping through a real 3-slice CT/CTA series, window-leveled with the SOFT TISSUE preset">
+      <p class="tabcaption">CT slices sharing one series are grouped into a single browsable stack — step through with Left/Right or the frame slider, and pick a Window/Level preset (soft tissue, bone, lung) when the study offers one.</p>
+    </div>
+    <div class="tabpanel" id="tab-rf" role="tabpanel" aria-labelledby="tabbtn-rf" hidden>
+      <img class="shot" src="/RF-Sample.png" width="1750" height="1504" alt="MacAngioView displaying a real radiofluoroscopic (RF) chest study with a Display Shutter applied">
+      <p class="tabcaption">Radiofluoroscopic (RF) studies display and cine through the same pipeline as angiography — including Display Shutter and window/level.</p>
+    </div>
+    <div class="tabpanel" id="tab-wave" role="tabpanel" aria-labelledby="tabbtn-wave" hidden>
+      <img class="shot" src="/ECG-Sample.png" width="1750" height="1466" alt="MacAngioView rendering a real 12-lead ECG Waveform Storage instance as a paginated lead-strip">
+      <p class="tabcaption">Waveform Storage instances — 12-lead ECG, hemodynamic, cardiac EP — render as paginated, calibrated lead-strip pages, right alongside the imaging.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
     <h2>Requirements</h2>
     <ul class="req">
       <li>Mac — macOS 12 (Monterey) or later, Apple silicon or Intel</li>
@@ -169,6 +198,23 @@
 </footer>
 
 <script>
+// "New in 1.4b" screenshot tabs — plain click-to-switch, no framework.
+(function () {
+  document.querySelectorAll('.tabs').forEach(function (tabs) {
+    tabs.addEventListener('click', function (e) {
+      var btn = e.target.closest('.tab');
+      if (!btn) return;
+      tabs.querySelectorAll('.tab').forEach(function (b) {
+        b.setAttribute('aria-selected', String(b === btn));
+      });
+      var panels = tabs.parentElement.querySelectorAll('.tabpanel');
+      panels.forEach(function (p) {
+        p.hidden = (p.id !== btn.getAttribute('aria-controls'));
+      });
+    });
+  });
+})();
+
 // Latest release version, straight from the public GitHub API. Leaves the
 // element empty rather than showing a stale or broken placeholder on failure.
 (function () {
