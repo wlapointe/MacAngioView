@@ -85,6 +85,8 @@
   .tab[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
   .tabpanel .shot{margin-top:0}
   .tabcaption{color:var(--muted);font-size:.95rem;margin-top:16px;max-width:640px}
+  .credit{display:block;font-size:.8rem;margin-top:8px}
+  .credit a{color:inherit}
   .faq h3{font-size:1.05rem;margin:22px 0 6px}
   .faq p{color:var(--muted);font-size:.95rem}
   footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
@@ -133,6 +135,30 @@
       <div class="card"><h3>Discs without an index</h3><p>A folder of DICOM files with no DICOMDIR index opens as one study, so exported folders and discs that lack a catalogue are still readable.</p></div>
     </div>
     <div class="notice"><strong>Note:</strong> MacAngioView is intended for review and educational use. It is not certified as a medical device and should not be used for primary diagnosis.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>New in 1.5b</h2>
+    <p class="tabcaption" style="margin:0 0 24px">One universal Mac app, native on Apple silicon and Intel. Every study now opens at its own resolution, MR joins the supported modalities, and saved annotated views are read for the first time.</p>
+    <div class="tabs" role="tablist" aria-label="New in 1.5b screenshots">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="tab-zoom" id="tabbtn-zoom">Native-resolution viewport</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="tab-mr" id="tabbtn-mr">MR series</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="tab-gsps" id="tabbtn-gsps">Presentation States</button>
+    </div>
+    <div class="tabpanel" id="tab-zoom" role="tabpanel" aria-labelledby="tabbtn-zoom">
+      <img class="shot" src="/Zoom-Sample.png" width="1198" height="722" loading="lazy" alt="MacAngioView showing an abdominal CT slice magnified to 220 percent, roamed to the liver, pancreas and kidneys">
+      <p class="tabcaption">Every study renders at its own pixel resolution in a freely resizable window. Scroll to zoom under the cursor, drag to roam, drag a box to magnify a region, and double-click to switch between Actual Size and Fit to Window. <span class="credit">Image data: <a href="https://doi.org/10.5281/zenodo.3362844">CHAOS challenge dataset</a> (Kavur et al., 2019), <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>; this screenshot is shared under the same licence.</span></p>
+    </div>
+    <div class="tabpanel" id="tab-mr" role="tabpanel" aria-labelledby="tabbtn-mr" hidden>
+      <img class="shot" src="/MR-Sample.png" width="1198" height="722" loading="lazy" alt="MacAngioView showing a dual-echo abdominal MR series split into two stacks, one per echo, with echo 1 displayed">
+      <p class="tabcaption">A dual-echo MR sequence stored under one series opens as one stack per echo, in anatomical order, instead of flipping between echoes on every slice. <span class="credit">Image data: <a href="https://doi.org/10.5281/zenodo.3362844">CHAOS challenge dataset</a> (Kavur et al., 2019), <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>; this screenshot is shared under the same licence.</span></p>
+    </div>
+    <div class="tabpanel" id="tab-gsps" role="tabpanel" aria-labelledby="tabbtn-gsps" hidden>
+      <img class="shot" src="/GSPS-Sample.png" width="1198" height="814" loading="lazy" alt="MacAngioView rendering a Grayscale Softcopy Presentation State: a CT spine image with two circular regions of interest and their measurements">
+      <p class="tabcaption">A study's saved annotated view (Grayscale Softcopy Presentation State) opens as its own page, with its window, crop and markup applied. The unmarked original stays available beside it. Sample from the RSNA 2005 IHE Connectathon demonstration data.</p>
+    </div>
   </div>
 </section>
 
