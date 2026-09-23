@@ -53,7 +53,7 @@ disks, or exported folders.
 
 ## Requirements
 
-- Mac — macOS 12 (Monterey) or later, Apple silicon or Intel
+- Mac — macOS 14 (Sonoma) or later; one universal app, native on Apple silicon and Intel
 - Windows — Windows 10 or 11, 64-bit
 - DICOM XA or multiframe US studies on CD, disk, or folder
 

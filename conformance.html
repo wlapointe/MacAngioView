@@ -46,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer
-Version 1.5b · Document date 2026-09-23 · Document version 2.18 (draft)</p>
+Version 1.5b · Document date 2026-09-23 · Document version 2.19 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -304,10 +304,26 @@ DICOM objects.</p>
 <td>1.5b</td>
 <td>MR Image Storage and Enhanced MR Image Storage named explicitly as supported SOP Classes, and the CT/MR (STD-CTMR) media profile family added to Table 1-2 — MR instances were already read and grouped, the multi-slice grouping never having been gated on Modality, but neither the SOP Classes nor the profile were declared. Multi-slice grouping additionally gains an MR echo component: a series carrying more than one echo splits into one run per echo, keyed on Echo Numbers (0018,0086) where present and Echo Time (0018,0081) otherwise, under the same uniformity and no-orphan rules as the CT reconstruction and cardiac-phase components (§4.4, §4.6, §7.1)</td>
 </tr>
+<tr>
+<td>2.17 (draft)</td>
+<td>2026-09-22</td>
+<td>1.5b</td>
+<td>Two presentation refinements. The runs a partitioned Series Instance UID becomes are now presented in cardiac-phase then echo order rather than in the order their instances were read, so a dual-echo MR opens echo 1 first whatever order the files arrive in; a reconstruction split, which carries no natural order, keeps the order read. And a Window Center/Width pair repeated verbatim within one instance collapses to a single preset, so a run left with one distinct pair offers no Preset picker rather than a choice between identical windows (§4.6, §6.3)</td>
+</tr>
+<tr>
+<td>2.18 (draft)</td>
+<td>2026-09-23</td>
+<td>1.5b</td>
+<td>JPEG Extended (Process 2 &amp; 4) support corrected upward, superseding rev 2.6's "8-bit only" claim: 12-bit samples decode through pylibjpeg-libjpeg, which is a bundled dependency rather than the unbundled plugin rev 2.6 tested against. The 12-bit XA sample that rev 2.6 recorded as a decode failure was found to be a malformed file rather than a missing capability — its scan header declares a DC-only spectral range, invalid for the sequential mode its frame header declares. Such a scan header is now corrected before decoding, for sequential frame headers only (§4.5)</td>
+</tr>
+<tr>
+<td>2.19 (draft)</td>
+<td>2026-09-23</td>
+<td>1.5b</td>
+<td>Platform line corrected: the macOS build is now universal (native on Intel and Apple Silicon, no Rosetta), and its minimum is macOS 14 (Sonoma), not 12 — the bundled numpy requires 14.0, and the app now declares that minimum so older macOS versions refuse to open it with a system message rather than failing at launch (§2.4). Revision-history rows 2.17 and 2.18 rejoined to this table</td>
+</tr>
 </tbody>
 </table>
-<p>| 2.17 (draft) | 2026-09-22 | 1.5b | Two presentation refinements. The runs a partitioned Series Instance UID becomes are now presented in cardiac-phase then echo order rather than in the order their instances were read, so a dual-echo MR opens echo 1 first whatever order the files arrive in; a reconstruction split, which carries no natural order, keeps the order read. And a Window Center/Width pair repeated verbatim within one instance collapses to a single preset, so a run left with one distinct pair offers no Preset picker rather than a choice between identical windows (§4.6, §6.3) |</p>
-<p>| 2.18 (draft) | 2026-09-23 | 1.5b | JPEG Extended (Process 2 &amp; 4) support corrected upward, superseding rev 2.6's "8-bit only" claim: 12-bit samples decode through pylibjpeg-libjpeg, which is a bundled dependency rather than the unbundled plugin rev 2.6 tested against. The 12-bit XA sample that rev 2.6 recorded as a decode failure was found to be a malformed file rather than a missing capability — its scan header declares a DC-only spectral range, invalid for the sequential mode its frame header declares. Such a scan header is now corrected before decoding, for sequential frame headers only (§4.5) |</p>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>This document is intended for people integrating or evaluating
 MacAngioView alongside other DICOM applications (modalities, media
@@ -338,7 +354,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Platform</td>
-<td>macOS 12+ (Intel and Apple Silicon via Rosetta 2); Windows 10/11 (64-bit)</td>
+<td>macOS 14+ (universal: native on Intel and Apple Silicon); Windows 10/11 (64-bit)</td>
 </tr>
 <tr>
 <td>DICOM toolkit</td>
