@@ -17,8 +17,13 @@ disks, or exported folders.
 - **Multiframe ultrasound (US)** — echo and vascular ultrasound cine loops
   play back the same way as angiography runs
 - **CT/CTA series** — a study's CT slices are grouped into one browsable
-  stack and stepped frame by frame, with a Preset picker for multi-valued
-  window/level (soft tissue, bone, lung)
+  stack, ordered by their true position in the patient rather than by file
+  numbering, and stepped slice by slice; a series holding several
+  reconstructions or cardiac phases opens as one stack each, with a Preset
+  picker for multi-valued window/level (soft tissue, bone, lung)
+- **MR series** — MR studies are read alongside the rest of a patient's
+  imaging and grouped into browsable stacks in anatomical order; a sequence
+  acquired at more than one echo opens as one stack per echo
 - **Broad compatibility** — reads studies exported from many cath-lab,
   ultrasound, and CT imaging systems; just open a study CD or folder
 - **Frame-by-frame review** — step through frames and adjust playback speed
@@ -36,6 +41,15 @@ disks, or exported folders.
 - **Caliper Tool** — two-click mm distance measurement, calibrated
   automatically from ultrasound region or XA beam geometry, or manually from
   a catheter shaft
+- **Native-resolution viewport** — every study renders at its own pixel
+  resolution in a freely resizable window; drag to roam, scroll to zoom under
+  the cursor, drag a box to magnify a region, double-click to toggle actual
+  size and fit to window
+- **Presentation States** — reads a study's saved annotated views (GSPS): the
+  window, crop, and circle/ellipse/text markup recorded on an image, shown as
+  its own page with the unmarked original still available
+- **Discs without an index** — a folder of DICOM files with no DICOMDIR opens
+  as one study
 
 ## Requirements
 

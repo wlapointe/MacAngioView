@@ -46,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer
-Version 1.3b · Document date 2026-08-07 · Document version 2.7 (draft)</p>
+Version 1.5b · Document date 2026-09-23 · Document version 2.18 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -117,6 +117,11 @@ purposes; it runs fully offline.</p>
 </tr>
 <tr>
 <td>Ultrasound (STD-US-ID/SC/CC-MF…, CD and DVD media)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>CT/MR (STD-CTMR-… CD and DVD media)</td>
 <td>No</td>
 <td>Yes</td>
 </tr>
@@ -263,8 +268,46 @@ DICOM objects.</p>
 <td>1.4b</td>
 <td>CT Image Storage (CT/CTA) named explicitly as a supported SOP Class: a study's single-frame CT slices sharing one Series Instance UID are grouped into one browsable multi-slice run (stepped, not cine-played) instead of arriving as N separate unplayable single-frame runs; multi-valued Window Center/Width (e.g. SOFT TISSUE/BONE/LUNG) is now offered as a selectable preset for any grayscale run that carries more than one W/L pair, not just CT (§4.4, §4.6, §7.1)</td>
 </tr>
+<tr>
+<td>2.11 (draft)</td>
+<td>2026-09-03</td>
+<td>1.4b</td>
+<td>Display pipeline replaced: every modality now renders at its native pixel resolution and aspect ratio through one freely resizable viewport with roam, marquee, and scroll-wheel zoom — no fixed 512/1024 display modes and no separate Ultrasound-only layout — superseding 2.3's US-native-viewport note. QuickTime export and Edit ▸ Copy already rendered at acquired resolution and are unaffected by the change (§4.6, §4.7)</td>
+</tr>
+<tr>
+<td>2.12 (draft)</td>
+<td>2026-09-13</td>
+<td>1.5b</td>
+<td>Documentation only — application UI and window-management reliability fixes (menu grouping, window resizing/sizing, a viewing-convenience checkbox's forced-view behavior, a user-selectable chrome text size). No change to supported SOP classes, transfer syntaxes, decoding, or the data displayed</td>
+</tr>
+<tr>
+<td>2.13 (draft)</td>
+<td>2026-09-15</td>
+<td>1.5b</td>
+<td>Grayscale Softcopy Presentation State and its XA/XRF-specific sibling named explicitly as supported SOP Classes: a Presentation State's referenced image is rendered with the object's own VOI window, Displayed Area Selection crop, and Graphic Annotation Sequence (text and CIRCLE/ELLIPSE/POLYLINE/POINT graphics) applied, as one read-only page — supersedes the 2.2–2.12 "presentation states: not interpreted as such" note. Color/Pseudo-Color/Blending/Volumetric-MPR/Volume-Rendering Presentation States remain unsupported (§4.4)</td>
+</tr>
+<tr>
+<td>2.14 (draft)</td>
+<td>2026-09-21</td>
+<td>1.5b</td>
+<td>CT/CTA multi-slice grouping refined, superseding 2.10's grouping note: slices within a run are ordered by through-plane geometry (Image Position Patient (0020,0032) projected onto the normal derived from Image Orientation Patient (0020,0037)) rather than by Instance Number, so a series with absent or non-monotonic Instance Numbers is still presented in anatomical order; and a Series Instance UID carrying more than one reconstruction (Convolution Kernel (0018,1210), Slice Thickness (0018,0050)) or cardiac phase (Nominal Percentage of Cardiac Phase (0020,9241)) is presented as one run per stack rather than one interleaved run. Such a component partitions a series only when it is present on every instance in that series and yields no single-instance group; a run is labelled only by those components uniform across it (§4.4, §4.6, §7.1)</td>
+</tr>
+<tr>
+<td>2.15 (draft)</td>
+<td>2026-09-21</td>
+<td>1.5b</td>
+<td>Documentation only — corrected a stale exclusion: §4.6 still listed Grayscale Softcopy Presentation States under "Not applied / not displayed", contradicting §4.4 and rev 2.13, which had described the GSPS rendering but left this note in place. The exclusion now names only the Color, Pseudo-Color, Blending, and Volumetric Presentation States that genuinely are not applied. §4.4's key-object-selection claim is likewise sharpened: a Key Object Selection Document is rendered as text of its content tree, while the selection itself is not acted on. No change to the application</td>
+</tr>
+<tr>
+<td>2.16 (draft)</td>
+<td>2026-09-21</td>
+<td>1.5b</td>
+<td>MR Image Storage and Enhanced MR Image Storage named explicitly as supported SOP Classes, and the CT/MR (STD-CTMR) media profile family added to Table 1-2 — MR instances were already read and grouped, the multi-slice grouping never having been gated on Modality, but neither the SOP Classes nor the profile were declared. Multi-slice grouping additionally gains an MR echo component: a series carrying more than one echo splits into one run per echo, keyed on Echo Numbers (0018,0086) where present and Echo Time (0018,0081) otherwise, under the same uniformity and no-orphan rules as the CT reconstruction and cardiac-phase components (§4.4, §4.6, §7.1)</td>
+</tr>
 </tbody>
 </table>
+<p>| 2.17 (draft) | 2026-09-22 | 1.5b | Two presentation refinements. The runs a partitioned Series Instance UID becomes are now presented in cardiac-phase then echo order rather than in the order their instances were read, so a dual-echo MR opens echo 1 first whatever order the files arrive in; a reconstruction split, which carries no natural order, keeps the order read. And a Window Center/Width pair repeated verbatim within one instance collapses to a single preset, so a run left with one distinct pair offers no Preset picker rather than a choice between identical windows (§4.6, §6.3) |</p>
+<p>| 2.18 (draft) | 2026-09-23 | 1.5b | JPEG Extended (Process 2 &amp; 4) support corrected upward, superseding rev 2.6's "8-bit only" claim: 12-bit samples decode through pylibjpeg-libjpeg, which is a bundled dependency rather than the unbundled plugin rev 2.6 tested against. The 12-bit XA sample that rev 2.6 recorded as a decode failure was found to be a malformed file rather than a missing capability — its scan header declares a DC-only spectral range, invalid for the sequential mode its frame header declares. Such a scan header is now corrected before decoding, for sequential frame headers only (§4.5) |</p>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>This document is intended for people integrating or evaluating
 MacAngioView alongside other DICOM applications (modalities, media
@@ -291,7 +334,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td>1.3b</td>
+<td>1.5b</td>
 </tr>
 <tr>
 <td>Platform</td>
@@ -341,8 +384,13 @@ content tree.</li>
 <p>MacAngioView is a <strong>general-purpose FSR</strong>: it does not verify that a
 file-set declares or conforms to a specific application profile. Any
 file-set whose instances use the SOP classes and transfer syntaxes listed
-below can be read; this covers the STD-GEN, STD-XABC, STD-XA1K, and STD-US
-family profiles listed in Table 1-2.</p>
+below can be read; this covers the STD-GEN, STD-XABC, STD-XA1K, STD-US, and
+STD-CTMR family profiles listed in Table 1-2. CT and MR studies are also
+commonly issued under IHE <strong>Portable Data for Imaging (PDI)</strong> rather than a
+PS3.11 STD- profile; PDI media build on the general-purpose CD/DVD profile
+and are read the same way. Because MacAngioView never validates a profile,
+this list describes the media it is designed against, not a gate applied to
+the file-set.</p>
 <div class="markdown-heading"><h3 class="heading-element">4.4 SOP Classes</h3><a id="user-content-44-sop-classes" class="anchor" aria-label="Permalink: 4.4 SOP Classes" href="#44-sop-classes"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p>Instance selection is <strong>content-based, not SOP-Class-restricted</strong>: any
 instance whose pixel data can be decoded is displayed. The SOP classes
@@ -374,7 +422,17 @@ below are the design targets and the ones exercised in testing.</p>
 <tr>
 <td>CT Image Storage</td>
 <td>1.2.840.10008.5.1.4.1.1.2</td>
-<td>Single-frame slices sharing a Series Instance UID are grouped into one browsable multi-slice run, ordered by Instance Number, and stepped (Left/Right or the frame slider) — not cine-played, since the "frames" are separate files with no playback timing of their own (§4.6)</td>
+<td>Single-frame slices sharing a Series Instance UID are grouped into one browsable multi-slice run, ordered by through-plane geometry (§4.6), split into one run per reconstruction or cardiac phase where the series carries more than one, and stepped (Left/Right or the frame slider) — not cine-played, since the "frames" are separate files with no playback timing of their own (§4.6)</td>
+</tr>
+<tr>
+<td>MR Image Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.4</td>
+<td>Single-frame slices are grouped, ordered, stepped and window-levelled exactly as CT above — the grouping is modality-agnostic. A series carrying more than one echo is split into one run per echo, identified by Echo Numbers (0018,0086) where present, else Echo Time (0018,0081) (§4.6)</td>
+</tr>
+<tr>
+<td>Enhanced MR Image Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.4.1</td>
+<td>Display, multi-frame stepping through the instance's own frames; per-frame functional groups are read for windowing as for other enhanced objects. Not further partitioned — a single instance is already one run</td>
 </tr>
 <tr>
 <td>Ultrasound Image Storage</td>
@@ -407,16 +465,31 @@ below are the design targets and the ones exercised in testing.</p>
 <td>Best-effort display when pixel data is decodable</td>
 </tr>
 <tr>
+<td>Grayscale Softcopy Presentation State Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.11.1</td>
+<td>Rendered as one read-only page per referenced image: the Presentation State's own Modality LUT (Rescale Slope/Intercept) when present, else the referenced image's; its Softcopy VOI LUT Sequence window, else the referenced image's own; Presentation LUT Shape polarity; a Displayed Area Selection crop; and its Graphic Annotation Sequence (Text Objects, and CIRCLE/ELLIPSE/POLYLINE/INTERPOLATED/POINT Graphic Objects), layered by Graphic Layer Order (§4.6)</td>
+</tr>
+<tr>
+<td>XA/XRF Grayscale Softcopy Presentation State Storage</td>
+<td>1.2.840.10008.5.1.4.1.1.11.5</td>
+<td>Same rendering as Grayscale Softcopy Presentation State Storage above</td>
+</tr>
+<tr>
 <td>Media Storage Directory Storage (DICOMDIR)</td>
 <td>1.2.840.10008.1.3.10</td>
 <td>Read (Referenced File ID resolution only)</td>
 </tr>
 </tbody>
 </table>
-<p>Presentation states (GSPS) and key object selections are <strong>not</strong>
-interpreted as such — but any image instance whose transfer syntax is a
-video codec (including US Multi-frame studies exported as MPEG-4) is
-decoded and played per 4.5. Structured Report documents are rendered as
+<p>Color, Pseudo-Color, Blending, and Volumetric (MPR / Volume Rendering)
+Presentation States are <strong>not</strong> interpreted as such. A Key Object Selection
+Document is rendered as paginated text of its content tree, like any other
+document in the SR SOP Class family, but the selection itself is <strong>not</strong>
+acted on: its references are listed rather than resolved, and the instances
+it selects are neither marked nor gathered anywhere in the interface. Any
+image instance whose transfer syntax is a video codec
+(including US Multi-frame studies exported as MPEG-4) is decoded and played
+per 4.5. Structured Report documents are rendered as
 read-only paginated text of their content tree; coded entries are shown
 by their Code Meaning (coding scheme designators and values are not
 displayed), and templates are not validated. IMAGE/COMPOSITE references
@@ -469,7 +542,7 @@ the video transfer syntaxes are decoded by the bundled ffmpeg
 <tr>
 <td>JPEG Extended (Process 2 &amp; 4)</td>
 <td>1.2.840.10008.1.2.4.51</td>
-<td>8-bit only — both bundled decoders (python-gdcm, Pillow) refuse 12-bit samples; a 12-bit XA sample also failed against the (unbundled) pylibjpeg-libjpeg plugin</td>
+<td>Yes, 8- and 12-bit — 12-bit samples decode through the bundled pylibjpeg-libjpeg plugin (python-gdcm and Pillow refuse them); a scan header declaring an invalid spectral range is repaired before decoding (§4.5)</td>
 </tr>
 <tr>
 <td>JPEG Lossless (Process 14)</td>
@@ -515,6 +588,14 @@ set carries no frame-rate attribute, the rate reported by the video stream
 itself is used. An instance in an unsupported transfer syntax is indexed
 but its thumbnail shows <strong>Error</strong> and the failure is logged to the in-app
 Console; it does not block the rest of the study.</p>
+<p>One encoder defect is tolerated rather than reported. ITU-T T.81 requires a
+sequential JPEG scan header to span the full spectral range (Ss=0, Se=63),
+but some encoders emit sequential frames declaring a DC-only range, which a
+conforming decoder refuses even though the entropy-coded data is intact.
+Where a frame's scan header shows this, the declared range is corrected and
+the frame decoded normally; the repair is logged to the Console. It is
+applied only to sequential frame headers, never to progressive or lossless
+ones, whose narrower spectral ranges are legitimate.</p>
 <div class="markdown-heading"><h3 class="heading-element">4.6 Display Pipeline (Attribute Usage)</h3><a id="user-content-46-display-pipeline-attribute-usage" class="anchor" aria-label="Permalink: 4.6 Display Pipeline (Attribute Usage)" href="#46-display-pipeline-attribute-usage"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <ul>
 <li>
@@ -603,8 +684,31 @@ Subtraction Sequence and supersedes a file-provided spec until removed.</li>
 that share a Series Instance UID (0020,000E) — a CT/CTA axial series,
 which arrives as one file per slice with no cine mechanism of its own —
 are collapsed at index time into one browsable multi-slice run, ordered
-by Instance Number (0020,0013), falling back to SOP Instance UID then
-the source path on ties or when it is absent. Each slice is decoded from
+by through-plane position — Image Position Patient (0020,0032) projected
+onto the normal derived from Image Orientation Patient (0020,0037), with
+the direction aligned to the series' Instance Number trend so a
+well-formed series orders exactly as Instance Number would. Slice
+Location (0020,1041), Instance Number (0020,0013), SOP Instance UID and
+the source path break ties or stand in when the geometry is absent.
+A Series Instance UID that carries more than one reconstruction
+(Convolution Kernel (0018,1210), Slice Thickness (0018,0050)), cardiac
+phase (Nominal Percentage of Cardiac Phase (0020,9241)), or MR echo
+(Echo Numbers (0018,0086), else Echo Time (0018,0081)) becomes one run
+per stack rather than one interleaved run. The grouping is
+modality-agnostic: it applies to any single-frame instances sharing a
+Series Instance UID, CT and MR alike, and a component simply has no
+effect on a series that does not carry it. Because these attributes are
+unreliable in practice, a component partitions a series only when it is
+present on every instance in that series <em>and</em> leaves no single-instance
+group; the decision is made across the whole series, never per slice, and
+a run is labelled only by those components uniform across it. The echo is
+named only where it actually distinguishes runs, since an unsplit
+single-echo series would otherwise be labelled with a first echo that
+tells the reader nothing. The runs one series becomes are presented in
+cardiac-phase then echo order — a dual-echo MR opens echo 1 first
+whatever order its files were read in — while a reconstruction split,
+having no natural order, keeps the order read; runs of other series are
+not reordered. Each slice is decoded from
 its own file on selection (no combined in-memory volume, no
 interpolation between slices — the same "decode on demand" pattern used
 for cine frames). The run steps (Left/Right, the frame slider) but does
@@ -614,12 +718,39 @@ export, and the Caliper Tool — a true multi-frame cine (Number of
 Frames &gt; 1) is never grouped this way, even when it shares a Series
 Instance UID with other runs.</li>
 <li>
+<strong>Presentation State rendering (GSPS / XA-XRF GSPS):</strong> at index time, each
+Presentation State's Referenced Series/Image Sequence is resolved against
+every other instance in the same input, producing one read-only page per
+reference it finds there (unresolved references are skipped and logged,
+not silently dropped). Each page applies, in order: the Presentation
+State's own Modality LUT (Rescale Slope/Intercept) when present — needed
+when the referenced image (often a Secondary Capture instance) carries
+none of its own — else the referenced image's; the first Softcopy VOI LUT
+Sequence (0070,0100 group) item applicable to that reference (matched by
+Referenced Image Sequence, or applying to every reference when a VOI item
+carries none), else the referenced image's own Window Center/Width, else
+the full data range; Presentation LUT Shape (0070,0100 group) polarity,
+defaulting to the referenced image's own Photometric Interpretation when
+absent; a Displayed Area Selection Sequence crop, at native pixel
+resolution (every Presentation Size Mode renders the same way — there is
+no live viewport to "scale to fit" into); and the Graphic Annotation
+Sequence's Text Objects and Graphic Objects (CIRCLE, ELLIPSE — as an
+axis-aligned bounding box, not a rotated ellipse — POLYLINE,
+INTERPOLATED, POINT), layered by Graphic Layer Order, DISPLAY-unit
+coordinates unsupported (no live viewport to size them against). A
+rendered page has no window/level control of its own (the window is
+already baked in) and does not cine-play, matching a Structured
+Report/PDF/Waveform document run.</li>
+<li>
 <strong>Selectable Window Center/Width presets:</strong> any grayscale run whose
 Window Center (0028,1050) / Window Width (0028,1051) carry more than one
 value pair — e.g. CT's SOFT TISSUE/BONE/LUNG presets — offers a Preset
 picker (info column) that applies a chosen pair as the active window;
 labels come positionally from Window Center &amp; Width Explanation
-(0028,1055) when present, else "Preset N". The default window shown on
+(0028,1055) when present, else "Preset N". A pair repeated verbatim
+within the instance collapses to one entry, keeping its first label — a
+run left with a single distinct pair offers no picker rather than a
+choice between identical windows. The default window shown on
 first display is still the first pair, per the VOI resolution order
 above; selecting a preset does not persist across slices of a grouped
 series run (§ above) — stepping to another slice keeps the last
@@ -650,17 +781,23 @@ the automatic scale above, persists per run for the session, and is
 the only path to a scale for a run whose data set has none of the
 attributes listed above.</li>
 <li>
-<strong>Not applied / not displayed:</strong> Grayscale Softcopy Presentation
-States.</li>
+<strong>Not applied / not displayed:</strong> Color, Pseudo-Color, Blending, and
+Volumetric (MPR / Volume Rendering) Presentation States. Grayscale
+Softcopy Presentation States (and the XA/XRF sibling) <em>are</em> applied —
+see the rendering described in §4.4.</li>
 <li>
-<strong>Rendering:</strong> frames are rendered to 8-bit for display, fit to a
-512×512 or 1024×1024 viewport (aspect preserved, never magnified past
-1:1 in 1024 mode). A study whose image instances are all Ultrasound is
-instead displayed in a viewport matching the study's largest
-pixel-aspect-corrected matrix (height rounded up to a multiple of 4;
-minimum 480×432, maximum 1024 per axis), so US frames render 1:1;
-thumbnails and interactive zoom selections preserve the source aspect
-ratio. No PS3.14 (GSDF) display calibration is performed.</li>
+<strong>Rendering:</strong> frames are rendered to 8-bit for display at the
+instance's <strong>native pixel resolution and aspect ratio</strong> — every
+modality (X-ray angiography, ultrasound, CT, …) displays through the
+same freely resizable viewport with no per-modality display mode, no
+auto-fit, and no letterboxing; a frame larger than the viewport is
+clipped and can be roamed. The user can additionally fit the whole
+frame to the window, or zoom from 0.1x to 8x (mouse marquee, scroll
+wheel, or the View menu), none of which is written to the data set or
+affects exported output (§4.7: export/copy are always the acquired
+resolution). Thumbnails and interactive zoom selections preserve the
+source aspect ratio. No PS3.14 (GSDF) display calibration is
+performed.</li>
 </ul>
 <div class="markdown-heading"><h3 class="heading-element">4.7 Extensions Beyond Part 10 Reading</h3><a id="user-content-47-extensions-beyond-part-10-reading" class="anchor" aria-label="Permalink: 4.7 Extensions Beyond Part 10 Reading" href="#47-extensions-beyond-part-10-reading"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <ul>
@@ -672,9 +809,12 @@ and the data set is read best-effort.</li>
 accepted (some media place the file-set in a subfolder).</li>
 <li>Encapsulated PDF documents are rendered in-app via PyMuPDF.</li>
 <li>Loaded runs can be exported to QuickTime (.mov, H.264) via the bundled
-ffmpeg; the displayed frame can be copied to the clipboard. These outputs
-are <strong>not</strong> DICOM objects and carry no DICOM header; any burned-in
-identification in the pixel data is preserved as-is.</li>
+ffmpeg, and the current frame can be copied to the clipboard; both
+render at the instance's full acquired resolution — cropped to the
+run's ROI (§4.6) when one is set, but never to the on-screen zoom/pan,
+which is a viewing aid only. These outputs are <strong>not</strong> DICOM objects
+and carry no DICOM header; any burned-in identification in the pixel
+data is preserved as-is.</li>
 <li>
 <strong>Quiz Mode</strong> (View ▸ Quiz Mode) is a non-DICOM, application-only
 self-study feature: it withholds the display of a study's own
