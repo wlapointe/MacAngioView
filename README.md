@@ -26,11 +26,12 @@ disks, or exported folders.
   acquired at more than one echo opens as one stack per echo
 - **Broad compatibility** — reads studies exported from many cath-lab,
   ultrasound, and CT imaging systems; just open a study CD or folder
-- **Frame-by-frame review** — step through frames and adjust playback speed
+- **Frame-by-frame review** — step through frames, adjust playback speed, and
+  jump to any run by name from the Select menu
 - **DSA subtraction** — view angiograms with the standing anatomy subtracted
   away, automatically or from a manually picked mask frame
 - **Export** — save cine runs as standard movie files for presentations and
-  teaching
+  teaching; exports and copied frames match what you see, including zoom
 - **Reports & waveforms** — view a study's encapsulated PDF reports, DICOM
   Structured Reports (cath, QCA, hemodynamics, ECG summaries), and Waveform
   Storage instances (12-lead ECG, hemodynamic, cardiac EP) rendered as

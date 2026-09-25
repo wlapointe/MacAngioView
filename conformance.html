@@ -46,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer
-Version 1.5b · Document date 2026-09-23 · Document version 2.19 (draft)</p>
+Version 1.51b · Document date 2026-09-25 · Document version 2.20 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -322,6 +322,12 @@ DICOM objects.</p>
 <td>1.5b</td>
 <td>Platform line corrected: the macOS build is now universal (native on Intel and Apple Silicon, no Rosetta), and its minimum is macOS 14 (Sonoma), not 12 — the bundled numpy requires 14.0, and the app now declares that minimum so older macOS versions refuse to open it with a system message rather than failing at launch (§2.4). Revision-history rows 2.17 and 2.18 rejoined to this table</td>
 </tr>
+<tr>
+<td>2.20 (draft)</td>
+<td>2026-09-25</td>
+<td>1.51b</td>
+<td>Two rendering changes. Grayscale thumbnails now go through the Modality transform and the same default VOI the Review pane opens a run with (VOI LUT table, else Window Center/Width, else the frame's value range) instead of a min–max stretch of stored values, so one out-of-range pixel no longer darkens a whole thumbnail (§7.2). QuickTime export and Copy now render what the Review pane's frame outline shows, magnified when zoomed and trimmed by the ROI, with an option to render the whole acquired frame as before (§4.7). Neither changes which attributes are read</td>
+</tr>
 </tbody>
 </table>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -350,7 +356,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td>1.5b</td>
+<td>1.51b</td>
 </tr>
 <tr>
 <td>Platform</td>
@@ -826,9 +832,11 @@ accepted (some media place the file-set in a subfolder).</li>
 <li>Encapsulated PDF documents are rendered in-app via PyMuPDF.</li>
 <li>Loaded runs can be exported to QuickTime (.mov, H.264) via the bundled
 ffmpeg, and the current frame can be copied to the clipboard; both
-render at the instance's full acquired resolution — cropped to the
-run's ROI (§4.6) when one is set, but never to the on-screen zoom/pan,
-which is a viewing aid only. These outputs are <strong>not</strong> DICOM objects
+render what the Review pane's frame outline shows — at 1× the whole
+frame, zoomed in the magnified part inside it — at the instance's
+full acquired size, or the run's ROI's (§4.6) when one is set. An
+export option ignores the zoom/pan and renders the whole acquired
+frame cut only by the ROI. These outputs are <strong>not</strong> DICOM objects
 and carry no DICOM header; any burned-in identification in the pixel
 data is preserved as-is.</li>
 <li>
@@ -903,7 +911,10 @@ Magnification Factor, and Distance Source to Detector / Patient.</p>
 C.11.2.1.2 LINEAR; C.11.2.1.3 LINEAR_EXACT and SIGMOID) over the effective
 window, or through the data set's VOI LUT table at the default window,
 then quantized to 8 bits; MONOCHROME1 output polarity is inverted after
-the VOI stage.</p>
+the VOI stage. Grayscale thumbnails use the same Modality transform and
+the run's default VOI (VOI LUT table, else the first Window Center/Width
+pair, else the frame's value range), so a thumbnail matches the run as it
+first opens.</p>
 </article>
 
 <footer>
