@@ -46,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer
-Version 1.51b · Document date 2026-09-25 · Document version 2.20 (draft)</p>
+Version 1.52b · Document date 2026-09-28 · Document version 2.21 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -328,6 +328,12 @@ DICOM objects.</p>
 <td>1.51b</td>
 <td>Two rendering changes. Grayscale thumbnails now go through the Modality transform and the same default VOI the Review pane opens a run with (VOI LUT table, else Window Center/Width, else the frame's value range) instead of a min–max stretch of stored values, so one out-of-range pixel no longer darkens a whole thumbnail (§7.2). QuickTime export and Copy now render what the Review pane's frame outline shows, magnified when zoomed and trimmed by the ROI, with an option to render the whole acquired frame as before (§4.7). Neither changes which attributes are read</td>
 </tr>
+<tr>
+<td>2.21 (draft)</td>
+<td>2026-09-28</td>
+<td>1.52b</td>
+<td>Documentation only — version bump for an application UI fix (the Select: run menu's dropdown width on macOS). No change to SOP Classes, Transfer Syntaxes, or the attributes read</td>
+</tr>
 </tbody>
 </table>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -356,7 +362,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td>1.51b</td>
+<td>1.52b</td>
 </tr>
 <tr>
 <td>Platform</td>
