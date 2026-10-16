@@ -46,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer
-Version 1.52b · Document date 2026-09-28 · Document version 2.21 (draft)</p>
+Version 1.53b · Document date 2026-10-14 · Document version 2.22 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -334,6 +334,12 @@ DICOM objects.</p>
 <td>1.52b</td>
 <td>Documentation only — version bump for an application UI fix (the Select: run menu's dropdown width on macOS). No change to SOP Classes, Transfer Syntaxes, or the attributes read</td>
 </tr>
+<tr>
+<td>2.22 (draft)</td>
+<td>2026-10-14</td>
+<td>1.53b</td>
+<td>Copy gains a second mode: with View ▸ Hide ROI on for a run, Edit ▸ Copy places the Review image exactly as displayed on the clipboard — the visible area at its on-screen size, ROI ignored — instead of the acquired-size render of the frame outline; QuickTime export is unchanged and always applies the ROI (§4.7). A frame larger than the Review pane at 1× is now outlined, copied and exported as the part the pane shows, at acquired resolution, rather than as a centred fit-size square magnified back to full size (§4.7). No change to SOP Classes, Transfer Syntaxes, or the attributes read</td>
+</tr>
 </tbody>
 </table>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -362,7 +368,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td>1.52b</td>
+<td>1.53b</td>
 </tr>
 <tr>
 <td>Platform</td>
@@ -840,9 +846,14 @@ accepted (some media place the file-set in a subfolder).</li>
 ffmpeg, and the current frame can be copied to the clipboard; both
 render what the Review pane's frame outline shows — at 1× the whole
 frame, zoomed in the magnified part inside it — at the instance's
-full acquired size, or the run's ROI's (§4.6) when one is set. An
+full acquired resolution: the frame's size, or the run's ROI's (§4.6)
+when one is set — for a frame larger than the pane at 1×, the part the
+pane shows (rows/columns beyond it are cut, never rescaled). An
 export option ignores the zoom/pan and renders the whole acquired
-frame cut only by the ROI. These outputs are <strong>not</strong> DICOM objects
+frame cut only by the ROI. With View ▸ Hide ROI on for a run, Copy
+instead takes the Review image exactly as displayed — the visible
+area at its on-screen size, ROI ignored; QuickTime export always
+applies the ROI. These outputs are <strong>not</strong> DICOM objects
 and carry no DICOM header; any burned-in identification in the pixel
 data is preserved as-is.</li>
 <li>

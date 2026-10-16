@@ -43,9 +43,10 @@ disks, or exported folders.
   automatically from ultrasound region or XA beam geometry, or manually from
   a catheter shaft
 - **Native-resolution viewport** — every study renders at its own pixel
-  resolution in a freely resizable window; drag to roam, scroll to zoom under
-  the cursor, drag a box to magnify a region, double-click to toggle actual
-  size and fit to window
+  resolution in a freely resizable window; drag or two-finger swipe to roam,
+  Cmd + scroll to zoom under the cursor (the scroll wheel on Windows), drag a
+  box to magnify a region, double-click to toggle actual size and fit to
+  window
 - **Presentation States** — reads a study's saved annotated views (GSPS): the
   window, crop, and circle/ellipse/text markup recorded on an image, shown as
   its own page with the unmarked original still available
