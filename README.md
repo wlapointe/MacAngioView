@@ -7,7 +7,8 @@ disks, or exported folders.
 <p align="center"><img src="screenshot.jpg" alt="MacAngioView playing a coronary cine-angiogram run, with run thumbnails and playback controls" width="720"></p>
 
 🌐 **Website:** [macangioview.com](https://macangioview.com)
-⬇️ **Download:** [MacAngioView.dmg (Mac)](https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView.dmg) · [MacAngioView-Windows.zip (Windows)](https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView-Windows.zip)
+🍎 **Mac:** MacAngioView continues as [CardiacStudy Player on the Mac App Store](https://apps.apple.com/app/id6824492948)
+⬇️ **Windows:** [MacAngioView-Windows.zip](https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView-Windows.zip) (free beta)
 
 ## Features
 
@@ -55,18 +56,22 @@ disks, or exported folders.
 
 ## Requirements
 
-- Mac — macOS 14 (Sonoma) or later; one universal app, native on Apple silicon and Intel
+- Mac — [CardiacStudy Player](https://apps.apple.com/app/id6824492948) from the Mac App Store; macOS 15 (Sequoia) or later, universal
 - Windows — Windows 10 or 11, 64-bit
 - DICOM XA or multiframe US studies on CD, disk, or folder
 
-## Install (Mac)
+## Mac
 
-1. Download [`MacAngioView.dmg`](https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView.dmg)
-2. Double-click the `.dmg` and drag **MacAngioView** onto **Applications**
-3. Launch from your Applications folder
+On the Mac, MacAngioView continues as **CardiacStudy Player** on the
+[Mac App Store](https://apps.apple.com/app/id6824492948): a one-time purchase
+with free updates, and no beta expiry. It also reads the DICOM 2026 transfer
+syntaxes (JPEG XL, Deflated Image Frame, Encapsulated Uncompressed).
 
-The Mac build is signed and notarized by Apple, so it opens with no security
-warnings.
+Earlier Mac betas (`MacAngioView.dmg`) stay on the
+[Releases](https://github.com/wlapointe/MacAngioView/releases) page. Each one
+works until its expiry date on your Mac. To install one, double-click the
+`.dmg` and drag **MacAngioView** onto **Applications**; it is signed and
+notarized by Apple.
 
 ## Install (Windows)
 
@@ -82,7 +87,7 @@ The Windows build isn't code-signed yet, so SmartScreen will show
 
 ## Support
 
-Questions or feedback? Email [wil.lapointe@mac.com](mailto:wil.lapointe@mac.com).
+Questions or feedback? Email [support@williamshillsoftware.com](mailto:support@williamshillsoftware.com).
 
 ---
 
