@@ -7,7 +7,7 @@ disks, or exported folders.
 <p align="center"><img src="screenshot.jpg" alt="MacAngioView playing a coronary cine-angiogram run, with run thumbnails and playback controls" width="720"></p>
 
 🌐 **Website:** [macangioview.com](https://macangioview.com)
-🍎 **Mac:** MacAngioView continues as [CardiacStudy Player on the Mac App Store](https://apps.apple.com/app/id6824492948)
+🍎 **Mac:** the Mac beta has ended. Its successor is [CardiacStudy: DICOM Viewer 1.1.0 on the Mac App Store](https://apps.apple.com/app/id6824492948)
 ⬇️ **Windows:** [MacAngioView-Windows.zip](https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView-Windows.zip) (free beta)
 
 ## Features
@@ -56,20 +56,23 @@ disks, or exported folders.
 
 ## Requirements
 
-- Mac — [CardiacStudy Player](https://apps.apple.com/app/id6824492948) from the Mac App Store; macOS 15 (Sequoia) or later, universal
-- Windows — Windows 10 or 11, 64-bit
+- Mac — [CardiacStudy: DICOM Viewer](https://apps.apple.com/app/id6824492948) from the Mac App Store; macOS 15 (Sequoia) or later, universal
+- Windows — MacAngioView free beta; Windows 10 or 11, 64-bit
 - DICOM XA or multiframe US studies on CD, disk, or folder
 
 ## Mac
 
-On the Mac, MacAngioView continues as **CardiacStudy Player** on the
-[Mac App Store](https://apps.apple.com/app/id6824492948): a one-time purchase
-with free updates, and no beta expiry. It also reads the DICOM 2026 transfer
-syntaxes (JPEG XL, Deflated Image Frame, Encapsulated Uncompressed).
+**The Mac beta is over.** MacAngioView for Mac has been rebuilt from scratch
+in Swift as a new, native app optimized for macOS:
+**CardiacStudy: DICOM Viewer 1.1.0**, now on the
+[Mac App Store](https://apps.apple.com/app/id6824492948). It is a one-time
+purchase with free updates and no expiry. It also adds CT and MR slice
+position with a scout reference view and slice marks, and reads the DICOM 2026
+transfer syntaxes (JPEG XL, Deflated Image Frame, Encapsulated Uncompressed).
 
-Earlier Mac betas (`MacAngioView.dmg`) stay on the
-[Releases](https://github.com/wlapointe/MacAngioView/releases) page. Each one
-works until its expiry date on your Mac. To install one, double-click the
+There will be no more Mac betas. The old ones (`MacAngioView.dmg`) stay on the
+[Releases](https://github.com/wlapointe/MacAngioView/releases) page for
+reference, and an installed one keeps working until its expiry date. To install one, double-click the
 `.dmg` and drag **MacAngioView** onto **Applications**; it is signed and
 notarized by Apple.
 

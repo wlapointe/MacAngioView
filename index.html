@@ -86,6 +86,8 @@
   ul.req{list-style:none;color:var(--muted)}
   ul.req li{padding:6px 0;border-bottom:1px solid var(--border)}
   ul.req li:last-child{border:none}
+  .ended{max-width:640px;margin:0 auto 28px;padding:14px 20px;border:1px solid var(--accent);border-radius:12px;background:rgba(59,130,246,.12);font-size:1rem}
+  .ended a{color:#93c5fd}
   .notice{background:#1a1426;border:1px solid #3a2d55;border-radius:12px;padding:18px 22px;color:var(--muted);font-size:.9rem;margin-top:24px}
   .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
   .tab{background:var(--panel);border:1px solid var(--border);color:var(--muted);font:inherit;font-weight:600;font-size:.95rem;padding:10px 20px;border-radius:8px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
@@ -111,13 +113,14 @@
     <h1>MacAngioView</h1>
     <p class="version" id="version"></p>
     <p class="tagline">A DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from a wide range of cath-lab and echo imaging systems — and read the study's PDF and Structured Report documents alongside.</p>
+    <p class="ended"><strong>The Mac beta is over.</strong> MacAngioView for Mac has been rebuilt from scratch in Swift as a new, fully native app, optimized for macOS: <a href="#store">CardiacStudy: DICOM Viewer 1.1.0</a>, now on the Mac App Store.</p>
     <div class="dl">
       <a class="store-badge" href="https://apps.apple.com/app/id6824492948">
-        <img src="/badges/mac-app-store-white.svg" alt="Download CardiacStudy Player on the Mac App Store" width="156" height="40">
+        <img src="/badges/mac-app-store-white.svg" alt="Download CardiacStudy: DICOM Viewer on the Mac App Store" width="156" height="40">
       </a>
       <a class="btn" href="https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView-Windows.zip">Download for Windows 10/11</a>
     </div>
-    <p class="sub">On the Mac, MacAngioView is now <a href="#store">CardiacStudy Player</a> on the Mac App Store (macOS 15 or later) &middot; Windows 10/11 (64-bit) free beta &middot; <a href="https://github.com/wlapointe/MacAngioView/releases">Earlier Mac betas on GitHub</a></p>
+    <p class="sub">Mac: <a href="#store">CardiacStudy: DICOM Viewer</a> on the Mac App Store (macOS 15 or later) &middot; Windows 10/11 (64-bit): MacAngioView free beta</p>
     <img class="shot" src="/screenshot.jpg" width="1750" height="1550"
          alt="MacAngioView playing a coronary cine-angiogram run at 30 fps, with run thumbnails including a structured report, frame slider, and window-level controls">
     <img class="shot" src="/Echocardiography-Sample.png" width="1910" height="1550"
@@ -127,19 +130,20 @@
 
 <section class="store" id="store">
   <div class="wrap">
-    <h2>Only in CardiacStudy Player for Mac</h2>
-    <p class="lead">MacAngioView's Mac app continues as CardiacStudy Player on the Mac App Store. It does everything below, plus:</p>
+    <h2>New for Mac: CardiacStudy: DICOM Viewer 1.1.0</h2>
+    <p class="lead">The MacAngioView Mac beta has ended. Its successor is a completely new app, written in Swift and optimized for macOS, and available now on the Mac App Store. It does everything below, plus:</p>
     <div class="grid">
       <div class="card"><h3>Native Mac app</h3><p>Rebuilt from the ground up with Apple's own frameworks, with a true Mac interface, menus, Help and Settings. Universal, native on Apple silicon and Intel.</p></div>
       <div class="card"><h3>Newest DICOM compression</h3><p>Reads the transfer syntaxes added in DICOM 2026: JPEG XL (lossless, lossy and JPEG recompression), Deflated Image Frame and Encapsulated Uncompressed.</p></div>
       <div class="card"><h3>No expiry, automatic updates</h3><p>Buy once and it keeps working. Updates arrive through the App Store, with no beta builds to replace.</p></div>
+      <div class="card"><h3>CT and MR stacks <span class="tag">New in 1.1</span></h3><p>Step through CT and MR series slice by slice, see each slice's body position on a scout reference view, and mark landmark slices to jump back to.</p></div>
       <div class="card"><h3>Private by design</h3><p>Sandboxed by Apple with no network access at all: no account, no analytics, and nothing leaves your Mac.</p></div>
     </div>
     <div class="cta">
       <a class="store-badge" href="https://apps.apple.com/app/id6824492948">
-        <img src="/badges/mac-app-store-white.svg" alt="Download CardiacStudy Player on the Mac App Store" width="156" height="40">
+        <img src="/badges/mac-app-store-white.svg" alt="Download CardiacStudy: DICOM Viewer on the Mac App Store" width="156" height="40">
       </a>
-      <p>One purchase, no subscription &middot; macOS 15 or later &middot; <a href="https://williamshillsoftware.com/cardiacstudy-player/">More about CardiacStudy Player</a></p>
+      <p>One purchase, no subscription &middot; macOS 15 or later &middot; <a href="https://williamshillsoftware.com/cardiacstudy-player/">More about CardiacStudy: DICOM Viewer</a></p>
     </div>
   </div>
 </section>
@@ -218,8 +222,8 @@
   <div class="wrap">
     <h2>Requirements</h2>
     <ul class="req">
-      <li>Mac — <a href="#store">CardiacStudy Player</a> from the Mac App Store; macOS 15 (Sequoia) or later, universal (Apple silicon and Intel)</li>
-      <li>Windows — Windows 10 or 11, 64-bit</li>
+      <li>Mac — <a href="#store">CardiacStudy: DICOM Viewer</a> from the Mac App Store; macOS 15 (Sequoia) or later, universal (Apple silicon and Intel)</li>
+      <li>Windows — MacAngioView free beta; Windows 10 or 11, 64-bit</li>
       <li>DICOM XA cine-angiogram runs or multiframe US studies on CD, disk, or folder</li>
     </ul>
   </div>
@@ -233,9 +237,9 @@
     <h3>Does it play ultrasound studies?</h3>
     <p>Yes. Multiframe DICOM ultrasound (US) cine loops — such as echocardiography and vascular studies — play back the same way as angiography runs.</p>
     <h3>Is it free?</h3>
-    <p>On Windows, yes: MacAngioView is a free beta from <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a>. On the Mac it continues as <a href="#store">CardiacStudy Player</a>, a one-time purchase on the Mac App Store with free updates.</p>
-    <h3>Where can I get an earlier Mac beta?</h3>
-    <p>Earlier Mac betas stay on <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a>. Each beta works until its expiry date on your Mac; after that, use CardiacStudy Player from the Mac App Store.</p>
+    <p>On Windows, yes: MacAngioView is a free beta from <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a>. On the Mac, the beta has ended; its successor is <a href="#store">CardiacStudy: DICOM Viewer</a>, a one-time purchase on the Mac App Store with free updates.</p>
+    <h3>What happened to the Mac beta?</h3>
+    <p>It has ended, and there will be no more Mac betas. MacAngioView for Mac has been replaced by <a href="#store">CardiacStudy: DICOM Viewer</a>, a new native app written in Swift and optimized for macOS, on the Mac App Store. An installed Mac beta keeps working until its expiry date. The old builds stay on <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a> for reference.</p>
     <h3>Windows says "Windows protected your PC" — is that a problem?</h3>
     <p>No. The Windows beta isn't code-signed yet, so SmartScreen warns on first launch. Click <strong>More info</strong>, then <strong>Run anyway</strong>. Extract the zip first and run <code>MacAngioView.exe</code> from the extracted folder.</p>
     <h3>Can I use it for diagnosis?</h3>
@@ -284,7 +288,7 @@
   fetch('https://api.github.com/repos/wlapointe/MacAngioView/releases/latest')
     .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
     .then(function (rel) {
-      if (rel && rel.tag_name) el.textContent = 'Latest version: ' + rel.tag_name;
+      if (rel && rel.tag_name) el.textContent = 'Windows beta: ' + rel.tag_name;
     })
     .catch(function () { /* leave it out entirely */ });
 })();
