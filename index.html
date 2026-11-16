@@ -71,7 +71,7 @@
   .sub{color:var(--muted);font-size:.9rem;margin-top:12px}
   .store{background:linear-gradient(180deg,#14223d 0%,var(--bg) 100%)}
   .store .lead{color:var(--muted);max-width:680px;margin:-8px 0 24px}
-  .store .card h3 .tag{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--accent);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+  .card h3 .tag{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--accent);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px}
   .store .cta{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:24px}
   .store .cta p{color:var(--muted);font-size:.9rem}
   .version{color:var(--muted);font-size:.8rem;opacity:.7;margin-top:6px}
@@ -161,8 +161,12 @@
       <div class="card"><h3>DSA subtraction</h3><p>View angiograms with the standing anatomy subtracted away — automatically when the study provides a mask, or pick any pre-contrast frame yourself and nudge out patient motion.</p></div>
       <div class="card"><h3>Export</h3><p>Export cine runs to standard movie formats for presentations and teaching files. Exports and copied frames match what you see: zoom in and the export is the magnified view, trimmed to any region you set.</p></div>
       <div class="card"><h3>Reports & waveforms</h3><p>View a study's reports right next to the imaging — encapsulated PDF reports, DICOM Structured Reports (cath, QCA, hemodynamics, ECG summaries), and Waveform Storage instances (12-lead ECG, hemodynamic, cardiac EP) rendered as calibrated lead-strip pages.</p></div>
-      <div class="card"><h3>Quiz Mode</h3><p>A self-study workflow — hides a study's own report until you're ready, then lets you record your own Cath, Echo, or Vascular findings and check them against the real report.</p></div>
+      <div class="card"><h3>Quiz Mode</h3><p>A self-study workflow — hides a study's own report until you're ready, then lets you record your own Cath, Echo, or Vascular findings, fill them straight from your own measurements, and check them against the real report.</p></div>
       <div class="card"><h3>Caliper Tool</h3><p>Two-click distance measurement in millimeters, calibrated automatically from an ultrasound region or XA beam geometry — or manually from a catheter shaft for the most accurate reading.</p></div>
+      <div class="card"><h3>Measurements <span class="tag">New in 1.6</span></h3><p>A Measure menu of teaching measurements: stenosis (manual QCA, snapping to the vessel edges) and LV ejection fraction on angiograms; Doppler, 2D dimensions and areas, LV volumes by Simpson's method and M-mode on echo, each calibrated by its own ultrasound region.</p></div>
+      <div class="card"><h3>Measurement Summary <span class="tag">New in 1.6</span></h3><p>Every measurement in the study in one window, with means and the results that combine images: stroke volume, cardiac output, aortic valve area, E/A, E/e′, biplane LA volume and EF. Copies as a table or saves as CSV, with no patient details.</p></div>
+      <div class="card"><h3>Annotate <span class="tag">New in 1.6</span></h3><p>Label images with text, arrows, boxes and ovals for teaching and conference slides. Annotations go into copied frames and exported movies, and come back when the study is opened again; the DICOM files are never changed.</p></div>
+      <div class="card"><h3>CT and MR slice navigation <span class="tag">New in 1.6</span></h3><p>See each slice's position in the body, follow it on a scout reference view and click to jump there, and mark landmark slices (left main, mid LAD, apex) to come back to.</p></div>
       <div class="card"><h3>Native-resolution viewport</h3><p>Every study renders at its own pixel resolution in a freely resizable window — drag or swipe to roam, Cmd + scroll to zoom under the cursor (the scroll wheel on Windows), drag a box to magnify a region, double-click to switch between actual size and fit to window.</p></div>
       <div class="card"><h3>Presentation States</h3><p>Reads a study's saved annotated views (GSPS): the window, crop, and circle, ellipse, or text markup someone recorded on an image, shown as its own page with the unmarked original still available.</p></div>
       <div class="card"><h3>Discs without an index</h3><p>A folder of DICOM files with no DICOMDIR index opens as one study, so exported folders and discs that lack a catalogue are still readable.</p></div>

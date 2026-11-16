@@ -38,11 +38,25 @@ disks, or exported folders.
   Storage instances (12-lead ECG, hemodynamic, cardiac EP) rendered as
   calibrated lead-strip pages, alongside the imaging
 - **Quiz Mode** — a self-study workflow that hides a study's own report until
-  you're ready, then lets you record your own findings and check them
-  against it
+  you're ready, then lets you record your own findings, fill them from your
+  own measurements, and check them against it
 - **Caliper Tool** — two-click mm distance measurement, calibrated
   automatically from ultrasound region or XA beam geometry, or manually from
   a catheter shaft
+- **Measurements** (new in 1.6) — a Measure menu of teaching measurements:
+  stenosis (manual QCA, snapping to the vessel edges) and LV ejection
+  fraction on angiograms; Doppler, 2D dimensions and areas, LV volumes by
+  Simpson's method and M-mode on echo, each calibrated by its own
+  ultrasound region
+- **Measurement Summary** (new in 1.6) — every measurement in the study in
+  one window, with means and the results that combine images (stroke
+  volume, cardiac output, aortic valve area, E/A, E/e′, biplane LA volume and
+  EF); copies as a table or saves as CSV, with no patient details
+- **Annotate** (new in 1.6) — text, arrows, boxes and ovals for teaching
+  and slides; included in copied frames and exported movies, never written
+  into the DICOM files
+- **CT and MR slice navigation** (new in 1.6) — each slice's body position,
+  a scout reference view to jump from, and marks for landmark slices
 - **Native-resolution viewport** — every study renders at its own pixel
   resolution in a freely resizable window; drag or two-finger swipe to roam,
   Cmd + scroll to zoom under the cursor (the scroll wheel on Windows), drag a

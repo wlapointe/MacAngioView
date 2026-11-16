@@ -46,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer
-Version 1.53b · Document date 2026-10-14 · Document version 2.22 (draft)</p>
+Version 1.6.0 · Document date 2026-11-15 · Document version 2.30 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -340,6 +340,54 @@ DICOM objects.</p>
 <td>1.53b</td>
 <td>Copy gains a second mode: with View ▸ Hide ROI on for a run, Edit ▸ Copy places the Review image exactly as displayed on the clipboard — the visible area at its on-screen size, ROI ignored — instead of the acquired-size render of the frame outline; QuickTime export is unchanged and always applies the ROI (§4.7). A frame larger than the Review pane at 1× is now outlined, copied and exported as the part the pane shows, at acquired resolution, rather than as a centred fit-size square magnified back to full size (§4.7). No change to SOP Classes, Transfer Syntaxes, or the attributes read</td>
 </tr>
+<tr>
+<td>2.23 (draft)</td>
+<td>2026-11-12</td>
+<td>1.6.0</td>
+<td>Annotations (§4.7): application-only text, arrow, box and oval graphics keyed by SOP Instance UID, kept in the application's settings and burned into QuickTime export and Copy. No change to SOP Classes, Transfer Syntaxes, or the attributes read beyond SOP Instance UID; nothing written to the data set. Measurements (§4.7): Stenosis and LV Ejection Fraction, stored like annotations; no further attributes read</td>
+</tr>
+<tr>
+<td>2.24 (draft)</td>
+<td>2026-11-14</td>
+<td>1.6.0</td>
+<td>Ultrasound calibration per region (§4.6): every calibrated item of the Sequence of Ultrasound Regions is read (Region Location, Spatial Format, Data Type, Physical Units/Delta X and Y, Reference Pixel), not only the first; a measurement uses the region under its first point; Doppler, M-mode and ECG regions read in their own units; grouped single-frame instances keep their own calibration. A JPEG Baseline/Extended colour image whose Photometric Interpretation is RGB but whose codestream is YCbCr (no JFIF or Adobe marker, component IDs 1, 2, 3) is converted to RGB, as JPEG decoders do (§4.6)</td>
+</tr>
+<tr>
+<td>2.25 (draft)</td>
+<td>2026-11-14</td>
+<td>1.6.0</td>
+<td>Doppler measurements (§4.7): velocity, VTI and pressure half-time on a spectral ultrasound region, calibrated by the region's Physical Delta X/Y, Reference Pixel X0/Y0 and Reference Pixel Physical Value X/Y (0018,6028/602A, now read); stored like annotations, nothing written to the data set</td>
+</tr>
+<tr>
+<td>2.26 (draft)</td>
+<td>2026-11-14</td>
+<td>1.6.0</td>
+<td>2D linear ultrasound measurements (§4.7): IVSd, LVIDd, LVPWd, LVIDs, LVOT diameter and aortic root, calibrated by the 2D region under the first point, with LV mass (ASE cube formula), relative wall thickness and fractional shortening; Patient's Size (0010,1020) and Patient's Weight (0010,1030) now read, for an LV mass index by the Mosteller body surface area. Stored like annotations, nothing written to the data set</td>
+</tr>
+<tr>
+<td>2.27 (draft)</td>
+<td>2026-11-15</td>
+<td>1.6.0</td>
+<td>2D area ultrasound measurements (§4.7): LA (apical 4- and 2-chamber), RA and RV (end-diastole, end-systole) outlines, calibrated by the 2D region they are traced in, with the single-plane area-length LA volume, an LA volume index by the same body surface area, and the RV fractional area change. No further attributes read; stored like annotations, nothing written to the data set</td>
+</tr>
+<tr>
+<td>2.28 (draft)</td>
+<td>2026-11-15</td>
+<td>1.6.0</td>
+<td>LV volumes and ejection fraction by Simpson's method of discs (§4.7): apical 4- and 2-chamber outlines at end-diastole and end-systole, single-plane on each image and biplane across the study's images, each trace keeping the calibration of the 2D region it was started in; Teichholz volumes and EF from the 2D linear LV diameters. No further attributes read; stored like annotations, nothing written to the data set</td>
+</tr>
+<tr>
+<td>2.29 (draft)</td>
+<td>2026-11-15</td>
+<td>1.6.0</td>
+<td>M-mode measurements (§4.7): TAPSE, MAPSE, the LV dimensions, heart rate from R-R and a plain depth and time, calibrated by the Physical Delta X (seconds) and Y (cm) of the M-mode region they start in; heart rate also on a Doppler or ECG region's time axis. No further attributes read; stored like annotations, nothing written to the data set</td>
+</tr>
+<tr>
+<td>2.30 (draft)</td>
+<td>2026-11-15</td>
+<td>1.6.0</td>
+<td>Measurement summary (§4.7): Measure ▸ Measurement Summary… lists every measurement in the study by run number and frame, the mean of each repeated one, and results that combine images (LVOT area, stroke volume, cardiac output, AVA by the continuity equation, E/A, E/e′ with two new tissue Doppler velocities, LV mass and Teichholz from the study's LV dimensions, the biplane LA volume, the biplane Simpson volumes); copied as tab-separated text or exported as CSV with no patient details, file or folder names and no UIDs. No further attributes read; nothing written to the data set, and no DICOM SR created</td>
+</tr>
 </tbody>
 </table>
 <div class="markdown-heading"><h3 class="heading-element">2.2 Audience and Remarks</h3><a id="user-content-22-audience-and-remarks" class="anchor" aria-label="Permalink: 2.2 Audience and Remarks" href="#22-audience-and-remarks"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -368,7 +416,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td>1.53b</td>
+<td>1.6.0</td>
 </tr>
 <tr>
 <td>Platform</td>
@@ -792,11 +840,21 @@ window/level the user set, matching how a real DICOM viewer's W/L
 control behaves when paging a stack.</li>
 <li>
 <strong>Calibrated distance measurement (Caliper Tool):</strong> an application
-feature (View ▸ Caliper Tool) that reports a user-drawn two-point
-distance in millimeters, resolved per run at index time in priority
-order: (1) the first item of the Sequence of Ultrasound Regions
-(0018,6011)'s Physical Delta X (0018,602C) when its Physical Units X
-Direction (0018,6024) is cm; (2) Pixel Spacing (0028,0030)'s column
+feature (Measure ▸ Caliper Tool) that reports a user-drawn two-point
+distance in millimeters, resolved per instance at index time in
+priority order: (1) the Sequence of Ultrasound Regions (0018,6011) —
+every region with a Physical Units X/Y Direction (0018,6024/6026) and
+a non-zero Physical Delta X/Y (0018,602C/602E) is read, with its Region
+Location Min/Max X0/Y0/X1/Y1 (0018,6018–601E), Region Spatial Format
+(0018,6012), Region Data Type (0018,6014) and Reference Pixel X0/Y0
+(0018,6020/6022). A measurement uses the region under its first point
+and may not reach into another region. A region whose X axis is in cm
+gives millimeters (the run's calibration readout shows the first such
+region); a Doppler, M-mode or ECG region reports the two points'
+separation in its own units (seconds, cm/s); outside every region no
+scale applies. When single-frame instances of one series are browsed
+as one run, each instance's own regions and scale are used;
+(2) Pixel Spacing (0028,0030)'s column
 value; (3) for XA/RF only, Imager Pixel Spacing (0018,1164) divided by
 the geometric magnification — Estimated Radiographic Magnification
 Factor (0018,1114), else Distance Source to Detector (0018,1110) ÷
@@ -807,7 +865,7 @@ written back to the data set, and no DICOM measurement/annotation
 object (e.g. an SR or GSPS) is created — the result is display-only,
 shown as an on-screen overlay and optionally recorded in a Quiz Mode
 finding (§4.7).
-As an application feature beyond the data set, View ▸ Calibrate
+As an application feature beyond the data set, Measure ▸ Calibrate
 Caliper… lets the user re-derive the scale by measuring across a
 reference of known size (a catheter shaft, by French size, or a
 custom length) — this manual calibration always takes priority over
@@ -867,6 +925,44 @@ or alters the source data set; the saved findings are written as a
 plain JSON file (not a DICOM SR or other DICOM object) alongside a
 de-identified run label and the application version, at a location the
 user chooses.</li>
+<li>
+<strong>Annotations</strong> (Annotate menu) are application-only text, arrow, box
+and oval graphics drawn over the Review image. They are keyed by the
+image's SOP Instance UID (0008,0018) — each slice's own for a grouped
+CT/MR series — and stored in the application's settings file, never in
+the source data set; no DICOM Presentation State, SR or other object is
+created. QuickTime export and Copy burn them into the output pixels,
+which, like those outputs generally, are not DICOM objects.</li>
+<li>
+<strong>Measurements</strong> (Measure menu: Stenosis, LV Ejection Fraction,
+Doppler, 2D Linear, 2D Area, LV Volumes, M-mode) are user-drawn diameters, outlines,
+envelope points and lines, stored and shown like annotations, bound to
+the frame they were drawn on. Percent stenosis, ejection fraction,
+relative wall thickness, fractional shortening and fractional area
+change are computed from the drawn geometry alone; millimetres,
+centimetres, square centimetres and millilitres use the caliper scale described above (an ultrasound 2D region, Pixel Spacing,
+Imager Pixel Spacing with the beam-geometry estimate, or a manual
+catheter calibration), Doppler values the spectral region's
+calibration, and M-mode values the M-mode (or, for heart rate, Doppler
+or ECG) region's seconds and centimetres per pixel. LV mass uses the ASE cube formula and the LA volume the
+single-plane area-length method, the echo LV volumes Simpson's method of
+discs (single-plane, or biplane across two images, each outline
+keeping its own region's calibration) or the Teichholz formula; the
+indexes divide by the
+Mosteller body surface area from Patient's Size (0010,1020) and
+Patient's Weight (0010,1030), shown only when both are present and
+plausible. No attribute beyond those is read, nothing is written to the
+data set, and no DICOM SR measurement report is created. The results
+are labelled "Educational use only".</li>
+<li>
+<strong>Measurement summary</strong> (Measure ▸ Measurement Summary…) tabulates the
+measurements above for the whole study, identifying each image only by
+its position in the run list and its frame. Its Copy (tab-separated
+text) and CSV export contain measurement names, values, units and run
+numbers only: no Patient, Study, Series or Instance attribute, no file or
+folder name and no UID; of the patient's data, only the derived body
+surface area's value appears, as the basis of the indexes. The output is
+not a DICOM object.</li>
 </ul>
 <hr>
 <div class="markdown-heading"><h2 class="heading-element">5. Support of Character Sets</h2><a id="user-content-5-support-of-character-sets" class="anchor" aria-label="Permalink: 5. Support of Character Sets" href="#5-support-of-character-sets"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
@@ -908,6 +1004,8 @@ Color LUT attributes, Positioner Primary/Secondary Angle (and the
 Positioner Position macro), the 60xx Overlay Plane attributes, the
 Display Shutter attributes, the Mask Subtraction Sequence and
 Recommended Viewing Mode, Patient Name, Patient ID, Patient Birth Date,
+Patient's Size and Patient's Weight (for the LV mass and LA volume
+indexes only),
 Study Date, Study Time, Encapsulated Document, MIME Type of Encapsulated
 Document, Waveform Sequence and its Number of Waveform
 Channels/Samples, Sampling Frequency, Waveform Bits Allocated, Waveform
