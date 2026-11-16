@@ -46,7 +46,7 @@
 <article class="wrap">
 <div class="markdown-heading"><h1 class="heading-element">DICOM Conformance Statement</h1><a id="user-content-dicom-conformance-statement" class="anchor" aria-label="Permalink: DICOM Conformance Statement" href="#dicom-conformance-statement"><span aria-hidden="true" class="octicon octicon-link"></span></a></div>
 <p><strong>MacAngioView</strong> — DICOM cine viewer
-Version 1.6.0 · Document date 2026-11-15 · Document version 2.30 (draft)</p>
+Version 1.6.0b · Document date 2026-11-15 · Document version 2.30 (draft)</p>
 <blockquote>
 <p><strong>Disclaimer.</strong> MacAngioView is a beta application for evaluation, review,
 and educational use only. It is <strong>not a certified medical device</strong> and is
@@ -343,49 +343,49 @@ DICOM objects.</p>
 <tr>
 <td>2.23 (draft)</td>
 <td>2026-11-12</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 <td>Annotations (§4.7): application-only text, arrow, box and oval graphics keyed by SOP Instance UID, kept in the application's settings and burned into QuickTime export and Copy. No change to SOP Classes, Transfer Syntaxes, or the attributes read beyond SOP Instance UID; nothing written to the data set. Measurements (§4.7): Stenosis and LV Ejection Fraction, stored like annotations; no further attributes read</td>
 </tr>
 <tr>
 <td>2.24 (draft)</td>
 <td>2026-11-14</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 <td>Ultrasound calibration per region (§4.6): every calibrated item of the Sequence of Ultrasound Regions is read (Region Location, Spatial Format, Data Type, Physical Units/Delta X and Y, Reference Pixel), not only the first; a measurement uses the region under its first point; Doppler, M-mode and ECG regions read in their own units; grouped single-frame instances keep their own calibration. A JPEG Baseline/Extended colour image whose Photometric Interpretation is RGB but whose codestream is YCbCr (no JFIF or Adobe marker, component IDs 1, 2, 3) is converted to RGB, as JPEG decoders do (§4.6)</td>
 </tr>
 <tr>
 <td>2.25 (draft)</td>
 <td>2026-11-14</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 <td>Doppler measurements (§4.7): velocity, VTI and pressure half-time on a spectral ultrasound region, calibrated by the region's Physical Delta X/Y, Reference Pixel X0/Y0 and Reference Pixel Physical Value X/Y (0018,6028/602A, now read); stored like annotations, nothing written to the data set</td>
 </tr>
 <tr>
 <td>2.26 (draft)</td>
 <td>2026-11-14</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 <td>2D linear ultrasound measurements (§4.7): IVSd, LVIDd, LVPWd, LVIDs, LVOT diameter and aortic root, calibrated by the 2D region under the first point, with LV mass (ASE cube formula), relative wall thickness and fractional shortening; Patient's Size (0010,1020) and Patient's Weight (0010,1030) now read, for an LV mass index by the Mosteller body surface area. Stored like annotations, nothing written to the data set</td>
 </tr>
 <tr>
 <td>2.27 (draft)</td>
 <td>2026-11-15</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 <td>2D area ultrasound measurements (§4.7): LA (apical 4- and 2-chamber), RA and RV (end-diastole, end-systole) outlines, calibrated by the 2D region they are traced in, with the single-plane area-length LA volume, an LA volume index by the same body surface area, and the RV fractional area change. No further attributes read; stored like annotations, nothing written to the data set</td>
 </tr>
 <tr>
 <td>2.28 (draft)</td>
 <td>2026-11-15</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 <td>LV volumes and ejection fraction by Simpson's method of discs (§4.7): apical 4- and 2-chamber outlines at end-diastole and end-systole, single-plane on each image and biplane across the study's images, each trace keeping the calibration of the 2D region it was started in; Teichholz volumes and EF from the 2D linear LV diameters. No further attributes read; stored like annotations, nothing written to the data set</td>
 </tr>
 <tr>
 <td>2.29 (draft)</td>
 <td>2026-11-15</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 <td>M-mode measurements (§4.7): TAPSE, MAPSE, the LV dimensions, heart rate from R-R and a plain depth and time, calibrated by the Physical Delta X (seconds) and Y (cm) of the M-mode region they start in; heart rate also on a Doppler or ECG region's time axis. No further attributes read; stored like annotations, nothing written to the data set</td>
 </tr>
 <tr>
 <td>2.30 (draft)</td>
 <td>2026-11-15</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 <td>Measurement summary (§4.7): Measure ▸ Measurement Summary… lists every measurement in the study by run number and frame, the mean of each repeated one, and results that combine images (LVOT area, stroke volume, cardiac output, AVA by the continuity equation, E/A, E/e′ with two new tissue Doppler velocities, LV mass and Teichholz from the study's LV dimensions, the biplane LA volume, the biplane Simpson volumes); copied as tab-separated text or exported as CSV with no patient details, file or folder names and no UIDs. No further attributes read; nothing written to the data set, and no DICOM SR created</td>
 </tr>
 </tbody>
@@ -416,7 +416,7 @@ VOI — Value of Interest. XA — X-Ray Angiography. US — Ultrasound.</p>
 </tr>
 <tr>
 <td>Version</td>
-<td>1.6.0</td>
+<td>1.6.0b</td>
 </tr>
 <tr>
 <td>Platform</td>
