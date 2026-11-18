@@ -63,6 +63,8 @@
   /* The stores' badges, unaltered: at least 40 px tall, clear space around them. */
   .badges{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 20px;align-items:center}
   .store-badge img{display:block;height:52px;width:auto}
+  .soon{display:flex;flex-direction:column;justify-content:center;height:52px;padding:0 22px;border:1px solid var(--border);border-radius:9px;background:var(--panel);color:var(--muted);font:600 1rem/1.15 inherit;cursor:not-allowed;opacity:.8}
+  .soon span{font-size:.7rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
   .sub{color:var(--muted);font-size:.9rem;margin-top:14px}
   .shot{display:block;max-width:720px;width:100%;height:auto;margin:40px auto 0;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
   section{padding:56px 0;border-top:1px solid var(--border)}
@@ -93,9 +95,13 @@
       <a class="store-badge" href="https://apps.apple.com/app/id6824492948">
         <img src="/badges/mac-app-store-white.svg" alt="Download CardiacStudy: DICOM Viewer on the Mac App Store" width="156" height="40">
       </a>
+      <!-- Until the Microsoft Store listing is live; then restore the badge:
       <a class="store-badge" href="https://apps.microsoft.com/detail/9NCS1WJT41L2">
         <img src="/badges/microsoft-store-light.svg" alt="Get CardiacStudy Player from Microsoft" width="147" height="40">
-      </a>
+      </a> -->
+      <button class="soon" type="button" disabled aria-disabled="true">
+        <span>Windows</span>Release Coming Soon
+      </button>
     </div>
     <p class="sub">Mac: macOS 15 or later, Apple silicon or Intel &middot; Windows: Windows 10 (1809 or later) or 11, 64-bit, with a 30-day free trial</p>
     <img class="shot" src="/screenshot.jpg" width="1440" height="900"
@@ -130,7 +136,7 @@
     <h3>Will my installed beta keep working?</h3>
     <p>Yes, until its expiry date. Beta builds are no longer available to download and will not be updated.</p>
     <h3>How do I get it?</h3>
-    <p>Only from the <a href="https://apps.apple.com/app/id6824492948">Mac App Store</a> or the <a href="https://apps.microsoft.com/detail/9NCS1WJT41L2">Microsoft Store</a>. It is a one-time purchase with free updates, and on Windows you can try it free for 30 days first.</p>
+    <p>Only from the <a href="https://apps.apple.com/app/id6824492948">Mac App Store</a> or the Microsoft Store, where the Windows release is coming soon. It is a one-time purchase with free updates, and on Windows you will be able to try it free for 30 days first.</p>
     <h3>Can I use it for diagnosis?</h3>
     <p>No. It is for teaching and case review. It is not a certified medical device and must not be used for diagnosis or clinical decisions.</p>
     <div class="notice"><strong>Support:</strong> questions and feedback to <a href="mailto:support@williamshillsoftware.com">support@williamshillsoftware.com</a>. Please never send patient images, discs or files that identify a patient.</div>
