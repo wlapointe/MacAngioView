@@ -12,8 +12,8 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer</title>
-<meta name="description" content="MacAngioView is a free DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from cath-lab and echo study CDs, view PDF and Structured Report documents, and export runs to standard movie formats.">
+<title>MacAngioView is now CardiacStudy: DICOM Viewer, for Mac and Windows</title>
+<meta name="description" content="The MacAngioView beta is over. Its successor, CardiacStudy: DICOM Viewer, plays cath, echo, CT and MR studies on Mac and Windows, and is available from the Mac App Store and the Microsoft Store.">
 <link rel="canonical" href="https://macangioview.com/">
 <link rel="icon" type="image/png" href="/icon.png">
 <link rel="apple-touch-icon" href="/icon.png">
@@ -21,13 +21,13 @@
 <!-- Open Graph / social sharing -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MacAngioView">
-<meta property="og:title" content="MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer">
-<meta property="og:description" content="Free DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from study CDs, and export to standard movie formats.">
+<meta property="og:title" content="MacAngioView is now CardiacStudy: DICOM Viewer">
+<meta property="og:description" content="A DICOM viewer for cath, echo, CT and MR studies on Mac and Windows, from the Mac App Store and the Microsoft Store.">
 <meta property="og:url" content="https://macangioview.com/">
 <meta property="og:image" content="https://macangioview.com/screenshot.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MacAngioView — DICOM Angiogram &amp; Ultrasound Cine Viewer">
-<meta name="twitter:description" content="Free DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from study CDs.">
+<meta name="twitter:title" content="MacAngioView is now CardiacStudy: DICOM Viewer">
+<meta name="twitter:description" content="A DICOM viewer for cath, echo, CT and MR studies on Mac and Windows.">
 <meta name="twitter:image" content="https://macangioview.com/screenshot.jpg">
 
 <!-- Structured data -->
@@ -35,290 +35,111 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "MacAngioView",
-  "operatingSystem": "Windows 10 or 11 (64-bit)",
+  "name": "CardiacStudy: DICOM Viewer",
+  "alternateName": ["CardiacStudy Player", "MacAngioView"],
+  "operatingSystem": "macOS 15 or later; Windows 10 or 11 (64-bit)",
   "applicationCategory": "MedicalApplication",
-  "description": "A DICOM cine viewer that plays back x-ray angiography (XA) and multiframe ultrasound (US) loops, with export to standard movie formats. For review and educational use; not a certified medical device.",
-  "url": "https://macangioview.com/",
+  "description": "A DICOM viewer for cath, echo, cardiac CT/MR and ECG studies, for teaching and case review. Not a certified medical device.",
+  "url": "https://williamshillsoftware.com/cardiacstudy-player/",
   "image": "https://macangioview.com/icon.png",
   "screenshot": "https://macangioview.com/screenshot.jpg",
-  "downloadUrl": "https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView-Windows.zip",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "author": { "@type": "Person", "name": "Wil Lapointe", "email": "wil.lapointe@williamshillsoftware.com" }
+  "author": { "@type": "Organization", "name": "Williams Hill Software", "url": "https://williamshillsoftware.com/" }
 }
 </script>
 
 <style>
   :root{
     --bg:#0b1220; --panel:#111a2e; --text:#e8edf6; --muted:#9fb0c9;
-    --accent:#3b82f6; --accent-h:#2563eb; --border:#22304d;
+    --accent:#3b82f6; --border:#22304d;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-  .wrap{max-width:900px;margin:0 auto;padding:0 24px}
-  header{padding:96px 0 64px;text-align:center;background:radial-gradient(ellipse at top,#16233f 0%,var(--bg) 70%)}
-  h1{font-size:2.8rem;letter-spacing:-.02em}
-  .tagline{font-size:1.25rem;color:var(--muted);margin:16px auto 32px;max-width:640px}
-  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:1.1rem;padding:14px 36px;border-radius:10px;transition:background .15s}
-  .btn:hover{background:var(--accent-h)}
-  /* Stacked download buttons: one column sized to the widest label, centred,
-     so both buttons share a width regardless of their text. */
-  .dl{display:grid;grid-auto-rows:auto;justify-content:center;gap:12px}
-  .dl .btn{width:100%;text-align:center}
-  /* Apple's badge, unaltered: at least 40 px tall, a quarter of its height clear around it. */
-  .store-badge{display:block;justify-self:center;padding:4px 0}
+  .wrap{max-width:900px;margin:0 auto;padding:0 16px}
+  header{padding:88px 0 56px;text-align:center;background:radial-gradient(ellipse at top,#16233f 0%,var(--bg) 70%)}
+  .was{color:var(--muted);font-size:1rem;letter-spacing:.02em}
+  h1{font-size:2.6rem;letter-spacing:-.02em;line-height:1.15;margin-top:6px}
+  .tagline{font-size:1.2rem;color:var(--muted);margin:16px auto 28px;max-width:640px}
+  .ended{max-width:640px;margin:0 auto 28px;padding:14px 20px;border:1px solid var(--accent);border-radius:12px;background:rgba(59,130,246,.12)}
+  /* The stores' badges, unaltered: at least 40 px tall, clear space around them. */
+  .badges{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 20px;align-items:center}
   .store-badge img{display:block;height:52px;width:auto}
-  .sub{color:var(--muted);font-size:.9rem;margin-top:12px}
-  .store{background:linear-gradient(180deg,#14223d 0%,var(--bg) 100%)}
-  .store .lead{color:var(--muted);max-width:680px;margin:-8px 0 24px}
-  .store .card h3 .tag{font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--accent);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px}
-  .store .cta{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:24px}
-  .store .cta p{color:var(--muted);font-size:.9rem}
-  .version{color:var(--muted);font-size:.8rem;opacity:.7;margin-top:6px}
-  .shot{display:block;max-width:560px;width:100%;height:auto;margin:40px auto 0;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-  .shot + .shot{margin-top:24px}
+  .sub{color:var(--muted);font-size:.9rem;margin-top:14px}
+  .shot{display:block;max-width:720px;width:100%;height:auto;margin:40px auto 0;border:1px solid var(--border);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
   section{padding:56px 0;border-top:1px solid var(--border)}
   h2{font-size:1.6rem;margin-bottom:24px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
   .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px}
   .card h3{font-size:1.05rem;margin-bottom:8px}
   .card p{color:var(--muted);font-size:.95rem}
-  ul.req{list-style:none;color:var(--muted)}
-  ul.req li{padding:6px 0;border-bottom:1px solid var(--border)}
-  ul.req li:last-child{border:none}
-  .ended{max-width:640px;margin:0 auto 28px;padding:14px 20px;border:1px solid var(--accent);border-radius:12px;background:rgba(59,130,246,.12);font-size:1rem}
-  .ended a{color:#93c5fd}
-  .notice{background:#1a1426;border:1px solid #3a2d55;border-radius:12px;padding:18px 22px;color:var(--muted);font-size:.9rem;margin-top:24px}
-  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
-  .tab{background:var(--panel);border:1px solid var(--border);color:var(--muted);font:inherit;font-weight:600;font-size:.95rem;padding:10px 20px;border-radius:8px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
-  .tab:hover{color:var(--text)}
-  .tab[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .tabpanel .shot{margin-top:0}
-  .tabcaption{color:var(--muted);font-size:.95rem;margin-top:16px;max-width:640px}
-  .credit{display:block;font-size:.8rem;margin-top:8px}
-  .credit a{color:inherit}
+  .more{margin-top:28px;font-size:1.05rem}
   .faq h3{font-size:1.05rem;margin:22px 0 6px}
+  .faq h3:first-of-type{margin-top:0}
   .faq p{color:var(--muted);font-size:.95rem}
+  .notice{background:#1a1426;border:1px solid #3a2d55;border-radius:12px;padding:18px 22px;color:var(--muted);font-size:.9rem;margin-top:28px}
   footer{padding:40px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
-  /* Download tally: deliberately understated, bottom-right. Stays empty (and
-     so invisible) if the GitHub API call fails or is rate-limited. */
-  .dlcount{text-align:right;font-size:.7rem;color:var(--muted);opacity:.5;margin-top:10px;font-variant-numeric:tabular-nums}
-  a{color:var(--accent)}
+  a{color:#93c5fd}
+  @media (max-width:480px){h1{font-size:2rem}.store-badge img{height:44px}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <h1>MacAngioView</h1>
-    <p class="version" id="version"></p>
-    <p class="tagline">A DICOM cine viewer. Play back x-ray angiography (XA) and multiframe ultrasound (US) loops from a wide range of cath-lab and echo imaging systems — and read the study's PDF and Structured Report documents alongside.</p>
-    <p class="ended"><strong>The Mac beta is over.</strong> MacAngioView for Mac has been rebuilt from scratch in Swift as a new, fully native app, optimized for macOS: <a href="#store">CardiacStudy: DICOM Viewer 1.1.0</a>, now on the Mac App Store.</p>
-    <div class="dl">
+    <p class="was">MacAngioView is now</p>
+    <h1>CardiacStudy: DICOM Viewer</h1>
+    <p class="tagline">Play cath and echo cines at their acquired frame rate, step through CT and MR, and read the study's reports and ECG in the same window. Now for Mac and Windows.</p>
+    <p class="ended"><strong>The MacAngioView beta is over.</strong> Its successor is a new app, rebuilt from scratch for each platform, and available only from the Mac App Store and the Microsoft Store.</p>
+    <div class="badges">
       <a class="store-badge" href="https://apps.apple.com/app/id6824492948">
         <img src="/badges/mac-app-store-white.svg" alt="Download CardiacStudy: DICOM Viewer on the Mac App Store" width="156" height="40">
       </a>
-      <a class="btn" href="https://github.com/wlapointe/MacAngioView/releases/latest/download/MacAngioView-Windows.zip">Download for Windows 10/11</a>
+      <a class="store-badge" href="https://apps.microsoft.com/detail/9NCS1WJT41L2">
+        <img src="/badges/microsoft-store-light.svg" alt="Get CardiacStudy Player from Microsoft" width="147" height="40">
+      </a>
     </div>
-    <p class="sub">Mac: <a href="#store">CardiacStudy: DICOM Viewer</a> on the Mac App Store (macOS 15 or later) &middot; Windows 10/11 (64-bit): MacAngioView free beta</p>
-    <img class="shot" src="/screenshot.jpg" width="1750" height="1550"
-         alt="MacAngioView playing a coronary cine-angiogram run at 30 fps, with run thumbnails including a structured report, frame slider, and window-level controls">
-    <img class="shot" src="/Echocardiography-Sample.png" width="1910" height="1550"
-         alt="MacAngioView playing a color-Doppler echocardiography (ultrasound) loop, with study thumbnails, frame slider, edge-enhance and window-level controls">
+    <p class="sub">Mac: macOS 15 or later, Apple silicon or Intel &middot; Windows: Windows 10 (1809 or later) or 11, 64-bit, with a 30-day free trial</p>
+    <img class="shot" src="/screenshot.jpg" width="1440" height="900"
+         alt="CardiacStudy: DICOM Viewer playing a coronary angiogram, with the study's runs and reports in a strip beside it">
   </div>
 </header>
 
-<section class="store" id="store">
+<section>
   <div class="wrap">
-    <h2>New for Mac: CardiacStudy: DICOM Viewer 1.1.0</h2>
-    <p class="lead">The MacAngioView Mac beta has ended. Its successor is a completely new app, written in Swift and optimized for macOS, and available now on the Mac App Store. It does everything below, plus:</p>
+    <h2>Everything MacAngioView did, and more</h2>
     <div class="grid">
-      <div class="card"><h3>Native Mac app</h3><p>Rebuilt from the ground up with Apple's own frameworks, with a true Mac interface, menus, Help and Settings. Universal, native on Apple silicon and Intel.</p></div>
-      <div class="card"><h3>Newest DICOM compression</h3><p>Reads the transfer syntaxes added in DICOM 2026: JPEG XL (lossless, lossy and JPEG recompression), Deflated Image Frame and Encapsulated Uncompressed.</p></div>
-      <div class="card"><h3>No expiry, automatic updates</h3><p>Buy once and it keeps working. Updates arrive through the App Store, with no beta builds to replace.</p></div>
-      <div class="card"><h3>CT and MR stacks <span class="tag">New in 1.1</span></h3><p>Step through CT and MR series slice by slice, see each slice's body position on a scout reference view, and mark landmark slices to jump back to.</p></div>
-      <div class="card"><h3>Private by design</h3><p>Sandboxed by Apple with no network access at all: no account, no analytics, and nothing leaves your Mac.</p></div>
+      <div class="card"><h3>Open any study</h3><p>Patient CDs, DICOMDIR folders or loose DICOM files. Every run, report and waveform in one strip, in one window.</p></div>
+      <div class="card"><h3>Play it as acquired</h3><p>Angiography, fluoroscopy and echo at their recorded frame rate, with DSA subtraction, window/level, zoom and pan.</p></div>
+      <div class="card"><h3>CT and MR</h3><p>Step through series slice by slice, with each slice's position on the study's scout image and landmark slices you can jump back to.</p></div>
+      <div class="card"><h3>Reports and ECG</h3><p>Structured and PDF reports, presentation states, and 12-lead ECG and hemodynamic waveforms as calibrated lead strips.</p></div>
+      <div class="card"><h3>Annotate and measure</h3><p>Stenosis and LV EF on angiograms; Doppler, 2D, Simpson's LV volumes and M-mode on echo; a measurement summary for the whole study.</p></div>
+      <div class="card"><h3>Teach</h3><p>Quiz Mode hides the report while you read the images cold and record your findings, then lets you compare. Export movies for lectures.</p></div>
+      <div class="card"><h3>Private by design</h3><p>Works offline with no account. The app makes no network connections, and nothing leaves your computer.</p></div>
+      <div class="card"><h3>One purchase</h3><p>Bought once from the store, with free updates. No subscription, no in-app purchases and no beta expiry.</p></div>
     </div>
-    <div class="cta">
-      <a class="store-badge" href="https://apps.apple.com/app/id6824492948">
-        <img src="/badges/mac-app-store-white.svg" alt="Download CardiacStudy: DICOM Viewer on the Mac App Store" width="156" height="40">
-      </a>
-      <p>One purchase, no subscription &middot; macOS 15 or later &middot; <a href="https://williamshillsoftware.com/cardiacstudy-player/">More about CardiacStudy: DICOM Viewer</a></p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Features</h2>
-    <div class="grid">
-      <div class="card"><h3>DICOM XA / RF playback</h3><p>Open and play multi-frame DICOM XA cine-angiogram and radiofluoroscopic (RF) runs, including lossless-JPEG compressed studies from cardiac catheter X-ray systems.</p></div>
-      <div class="card"><h3>Multiframe ultrasound (US)</h3><p>Play back multiframe DICOM ultrasound cine loops — review echo and vascular ultrasound studies alongside your angiograms.</p></div>
-      <div class="card"><h3>CT/CTA series</h3><p>A study's CT slices are grouped into one browsable stack, ordered by their true position in the patient rather than by file numbering, and stepped slice by slice. A series holding several reconstructions or cardiac phases opens as one stack each, with a Preset picker for multi-valued window/level (soft tissue, bone, lung).</p></div>
-      <div class="card"><h3>MR series</h3><p>MR studies are read alongside the rest of a patient's imaging, grouped into browsable stacks in anatomical order. A sequence acquired at more than one echo opens as one stack per echo, so each echo can be reviewed on its own rather than interleaved.</p></div>
-      <div class="card"><h3>Broad system compatibility</h3><p>Reads studies exported from many cath-lab, ultrasound, and CT imaging systems — load a study CD or exported folder and browse the runs.</p></div>
-      <div class="card"><h3>Frame-by-frame review</h3><p>Step through frames, adjust playback speed, and review runs at your own pace. Jump straight to any run by name from the Select menu.</p></div>
-      <div class="card"><h3>DSA subtraction</h3><p>View angiograms with the standing anatomy subtracted away — automatically when the study provides a mask, or pick any pre-contrast frame yourself and nudge out patient motion.</p></div>
-      <div class="card"><h3>Export</h3><p>Export cine runs to standard movie formats for presentations and teaching files. Exports and copied frames match what you see: zoom in and the export is the magnified view, trimmed to any region you set.</p></div>
-      <div class="card"><h3>Reports & waveforms</h3><p>View a study's reports right next to the imaging — encapsulated PDF reports, DICOM Structured Reports (cath, QCA, hemodynamics, ECG summaries), and Waveform Storage instances (12-lead ECG, hemodynamic, cardiac EP) rendered as calibrated lead-strip pages.</p></div>
-      <div class="card"><h3>Quiz Mode</h3><p>A self-study workflow — hides a study's own report until you're ready, then lets you record your own Cath, Echo, or Vascular findings and check them against the real report.</p></div>
-      <div class="card"><h3>Caliper Tool</h3><p>Two-click distance measurement in millimeters, calibrated automatically from an ultrasound region or XA beam geometry — or manually from a catheter shaft for the most accurate reading.</p></div>
-      <div class="card"><h3>Native-resolution viewport</h3><p>Every study renders at its own pixel resolution in a freely resizable window — drag or swipe to roam, Cmd + scroll to zoom under the cursor (the scroll wheel on Windows), drag a box to magnify a region, double-click to switch between actual size and fit to window.</p></div>
-      <div class="card"><h3>Presentation States</h3><p>Reads a study's saved annotated views (GSPS): the window, crop, and circle, ellipse, or text markup someone recorded on an image, shown as its own page with the unmarked original still available.</p></div>
-      <div class="card"><h3>Discs without an index</h3><p>A folder of DICOM files with no DICOMDIR index opens as one study, so exported folders and discs that lack a catalogue are still readable.</p></div>
-    </div>
-    <div class="notice"><strong>Note:</strong> MacAngioView is intended for review and educational use. It is not certified as a medical device and should not be used for primary diagnosis.</div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>New in 1.5b</h2>
-    <p class="tabcaption" style="margin:0 0 24px">One universal Mac app, native on Apple silicon and Intel. Every study now opens at its own resolution, MR joins the supported modalities, and saved annotated views are read for the first time.</p>
-    <div class="tabs" role="tablist" aria-label="New in 1.5b screenshots">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="tab-zoom" id="tabbtn-zoom">Native-resolution viewport</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="tab-mr" id="tabbtn-mr">MR series</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="tab-gsps" id="tabbtn-gsps">Presentation States</button>
-    </div>
-    <div class="tabpanel" id="tab-zoom" role="tabpanel" aria-labelledby="tabbtn-zoom">
-      <img class="shot" src="/Zoom-Sample.png" width="1198" height="722" loading="lazy" alt="MacAngioView showing an abdominal CT slice magnified to 220 percent, roamed to the liver, pancreas and kidneys">
-      <p class="tabcaption">Every study renders at its own pixel resolution in a freely resizable window. Drag or swipe with two fingers to roam, Cmd + scroll to zoom under the cursor (the scroll wheel on Windows), drag a box to magnify a region, and double-click to switch between Actual Size and Fit to Window. <span class="credit">Image data: <a href="https://doi.org/10.5281/zenodo.3362844">CHAOS challenge dataset</a> (Kavur et al., 2019), <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>; this screenshot is shared under the same licence.</span></p>
-    </div>
-    <div class="tabpanel" id="tab-mr" role="tabpanel" aria-labelledby="tabbtn-mr" hidden>
-      <img class="shot" src="/MR-Sample.png" width="1198" height="722" loading="lazy" alt="MacAngioView showing a dual-echo abdominal MR series split into two stacks, one per echo, with echo 1 displayed">
-      <p class="tabcaption">A dual-echo MR sequence stored under one series opens as one stack per echo, in anatomical order, instead of flipping between echoes on every slice. <span class="credit">Image data: <a href="https://doi.org/10.5281/zenodo.3362844">CHAOS challenge dataset</a> (Kavur et al., 2019), <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>; this screenshot is shared under the same licence.</span></p>
-    </div>
-    <div class="tabpanel" id="tab-gsps" role="tabpanel" aria-labelledby="tabbtn-gsps" hidden>
-      <img class="shot" src="/GSPS-Sample.png" width="1198" height="814" loading="lazy" alt="MacAngioView rendering a Grayscale Softcopy Presentation State: a CT spine image with two circular regions of interest and their measurements">
-      <p class="tabcaption">A study's saved annotated view (Grayscale Softcopy Presentation State) opens as its own page, with its window, crop and markup applied. The unmarked original stays available beside it. Sample from the RSNA 2005 IHE Connectathon demonstration data.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Additional Support</h2>
-    <div class="tabs" role="tablist" aria-label="New modality screenshots">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="tab-cta" id="tabbtn-cta">CT/CTA</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="tab-rf" id="tabbtn-rf">RF Fluoroscopy</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="tab-wave" id="tabbtn-wave">ECG Waveform</button>
-    </div>
-    <div class="tabpanel" id="tab-cta" role="tabpanel" aria-labelledby="tabbtn-cta">
-      <img class="shot" src="/CTA-Sample.png" width="1750" height="1466" alt="MacAngioView stepping through a real 3-slice CT/CTA series, window-leveled with the SOFT TISSUE preset">
-      <p class="tabcaption">CT slices sharing one series are grouped into a single browsable stack — step through with Left/Right or the frame slider, and pick a Window/Level preset (soft tissue, bone, lung) when the study offers one.</p>
-    </div>
-    <div class="tabpanel" id="tab-rf" role="tabpanel" aria-labelledby="tabbtn-rf" hidden>
-      <img class="shot" src="/RF-Sample.png" width="1750" height="1504" alt="MacAngioView displaying a real radiofluoroscopic (RF) chest study with a Display Shutter applied">
-      <p class="tabcaption">Radiofluoroscopic (RF) studies display and cine through the same pipeline as angiography — including Display Shutter and window/level.</p>
-    </div>
-    <div class="tabpanel" id="tab-wave" role="tabpanel" aria-labelledby="tabbtn-wave" hidden>
-      <img class="shot" src="/ECG-Sample.png" width="1750" height="1466" alt="MacAngioView rendering a real 12-lead ECG Waveform Storage instance as a paginated lead-strip">
-      <p class="tabcaption">Waveform Storage instances — 12-lead ECG, hemodynamic, cardiac EP — render as paginated, calibrated lead-strip pages, right alongside the imaging.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Requirements</h2>
-    <ul class="req">
-      <li>Mac — <a href="#store">CardiacStudy: DICOM Viewer</a> from the Mac App Store; macOS 15 (Sequoia) or later, universal (Apple silicon and Intel)</li>
-      <li>Windows — MacAngioView free beta; Windows 10 or 11, 64-bit</li>
-      <li>DICOM XA cine-angiogram runs or multiframe US studies on CD, disk, or folder</li>
-    </ul>
+    <img class="shot" src="/echo.jpg" width="1440" height="900" loading="lazy"
+         alt="CardiacStudy: DICOM Viewer measuring LV volumes and ejection fraction by the biplane Simpson's method on an apical 2-chamber echo clip">
+    <p class="more">Previews, screenshots, versions and support: <a href="https://williamshillsoftware.com/cardiacstudy-player/">CardiacStudy: DICOM Viewer at Williams Hill Software</a></p>
   </div>
 </section>
 
 <section class="faq">
   <div class="wrap">
-    <h2>FAQ</h2>
-    <h3>Can I open my angiogram CD myself?</h3>
-    <p>Yes. Insert the CD (or copy its contents to a folder), open MacAngioView, and point it at the disc or folder. It finds the DICOM XA runs automatically — no separate viewer software from the CD is needed.</p>
-    <h3>Does it play ultrasound studies?</h3>
-    <p>Yes. Multiframe DICOM ultrasound (US) cine loops — such as echocardiography and vascular studies — play back the same way as angiography runs.</p>
-    <h3>Is it free?</h3>
-    <p>On Windows, yes: MacAngioView is a free beta from <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a>. On the Mac, the beta has ended; its successor is <a href="#store">CardiacStudy: DICOM Viewer</a>, a one-time purchase on the Mac App Store with free updates.</p>
-    <h3>What happened to the Mac beta?</h3>
-    <p>It has ended, and there will be no more Mac betas. MacAngioView for Mac has been replaced by <a href="#store">CardiacStudy: DICOM Viewer</a>, a new native app written in Swift and optimized for macOS, on the Mac App Store. An installed Mac beta keeps working until its expiry date. The old builds stay on <a href="https://github.com/wlapointe/MacAngioView/releases">GitHub Releases</a> for reference.</p>
-    <h3>Windows says "Windows protected your PC" — is that a problem?</h3>
-    <p>No. The Windows beta isn't code-signed yet, so SmartScreen warns on first launch. Click <strong>More info</strong>, then <strong>Run anyway</strong>. Extract the zip first and run <code>MacAngioView.exe</code> from the extracted folder.</p>
+    <h2>Questions</h2>
+    <h3>What happened to MacAngioView?</h3>
+    <p>The free MacAngioView beta has ended, on both Mac and Windows, and there will be no more betas. CardiacStudy: DICOM Viewer replaces it: a new app written for each platform, with everything MacAngioView did plus annotations and measurements. On the Microsoft Store it is called CardiacStudy Player, which is also the name the installed app uses on both.</p>
+    <h3>Will my installed beta keep working?</h3>
+    <p>Yes, until its expiry date. Beta builds are no longer available to download and will not be updated.</p>
+    <h3>How do I get it?</h3>
+    <p>Only from the <a href="https://apps.apple.com/app/id6824492948">Mac App Store</a> or the <a href="https://apps.microsoft.com/detail/9NCS1WJT41L2">Microsoft Store</a>. It is a one-time purchase with free updates, and on Windows you can try it free for 30 days first.</p>
     <h3>Can I use it for diagnosis?</h3>
-    <p>No. MacAngioView is for review, education, and personal record-keeping. It is not a certified medical device and must not be used for primary diagnosis or treatment decisions.</p>
-    <h3>Is there a DICOM Conformance Statement?</h3>
-    <p>Yes — read the <a href="/conformance.html">DICOM Conformance Statement</a> right here on the site (also available as a <a href="/DICOM_CONFORMANCE.pdf">PDF</a>, and included in the download). It lists the supported SOP classes, transfer syntaxes, media profiles, and display pipeline.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Support</h2>
-    <p style="color:var(--muted)">Questions or feedback? Email <a href="mailto:support@williamshillsoftware.com">support@williamshillsoftware.com</a>.</p>
+    <p>No. It is for teaching and case review. It is not a certified medical device and must not be used for diagnosis or clinical decisions.</p>
+    <div class="notice"><strong>Support:</strong> questions and feedback to <a href="mailto:support@williamshillsoftware.com">support@williamshillsoftware.com</a>. Please never send patient images, discs or files that identify a patient.</div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">&copy; 2026 Wil Lapointe &middot; MacAngioView &middot; <a href="/conformance.html">DICOM Conformance Statement</a>
-    <div class="dlcount" id="dlcount"></div>
-  </div>
+  <div class="wrap">&copy; 2026 Wil Lapointe &middot; <a href="https://williamshillsoftware.com/">Williams Hill Software</a></div>
 </footer>
-
-<script>
-// Screenshot tabs — plain click-to-switch, no framework.
-(function () {
-  document.querySelectorAll('.tabs').forEach(function (tabs) {
-    tabs.addEventListener('click', function (e) {
-      var btn = e.target.closest('.tab');
-      if (!btn) return;
-      tabs.querySelectorAll('.tab').forEach(function (b) {
-        b.setAttribute('aria-selected', String(b === btn));
-      });
-      var panels = tabs.parentElement.querySelectorAll('.tabpanel');
-      panels.forEach(function (p) {
-        p.hidden = (p.id !== btn.getAttribute('aria-controls'));
-      });
-    });
-  });
-})();
-
-// Latest release version, straight from the public GitHub API. Leaves the
-// element empty rather than showing a stale or broken placeholder on failure.
-(function () {
-  var el = document.getElementById('version');
-  if (!el) return;
-  fetch('https://api.github.com/repos/wlapointe/MacAngioView/releases/latest')
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function (rel) {
-      if (rel && rel.tag_name) el.textContent = 'Windows beta: ' + rel.tag_name;
-    })
-    .catch(function () { /* leave it out entirely */ });
-})();
-
-// Release-asset download tallies, straight from the public GitHub API
-// (CORS-enabled, 60 req/hr per visitor IP, 60s cache). Rendered as
-// <mac>-<windows>. Any failure leaves the element empty rather than
-// showing a broken placeholder.
-(function () {
-  var el = document.getElementById('dlcount');
-  if (!el) return;
-  fetch('https://api.github.com/repos/wlapointe/MacAngioView/releases')
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function (releases) {
-      if (!Array.isArray(releases)) return;
-      var mac = 0, win = 0;
-      releases.forEach(function (rel) {
-        (rel.assets || []).forEach(function (a) {
-          var n = (a.name || '').toLowerCase();
-          var c = a.download_count || 0;
-          if (n.endsWith('.dmg')) mac += c;
-          else if (n.endsWith('.exe') || n.endsWith('.msi') ||
-                   n.indexOf('windows') !== -1) win += c;
-        });
-      });
-      el.textContent = mac + '-' + win;
-    })
-    .catch(function () { /* leave the tally out entirely */ });
-})();
-</script>
 
 </body>
 </html>
